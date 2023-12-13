@@ -1,0 +1,33 @@
+const aliasProps = {
+  w: 'width',
+  h: 'height',
+  maxw: 'maxWidth',
+  maxh: 'maxHeight',
+  minw: 'minWidth',
+  minh: 'minHeight',
+  lh: 'lineHeight',
+  bg: 'backgroundColor',
+  z: 'zIndex',
+
+  i: 'inset',
+  t: 'top',
+  b: 'bottom',
+  l: 'left',
+  r: 'right',
+  m: 'margin',
+  mt: 'marginTop',
+  mb: 'marginBottom',
+  ml: 'marginLeft',
+  mr: 'marginRight',
+  mx: 'marginHorizontal',
+  my: 'marginVertical',
+  p: 'padding',
+  pt: 'paddingTop',
+  pb: 'paddingBottom',
+  pl: 'paddingLeft',
+  pr: 'paddingRight',
+  px: 'paddingHorizontal',
+  py: 'paddingVertical',
+};
+
+export default aliasProps;

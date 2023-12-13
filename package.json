@@ -1,0 +1,15 @@
+{
+  "name": "tenize",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsx watch src/index.ts"
+  },
+  "devDependencies": {
+    "csstype": "^3.1.3",
+    "prettier": "^3.1.1",
+    "tsx": "^4.6.2",
+    "typescript": "^5.3.3"
+  }
+}
