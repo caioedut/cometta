@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode } from 'react';
-import cometta from '../../../../src';
+import cometta from '../../../src';
 
 cometta.normalize();
 
