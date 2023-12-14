@@ -1,7 +1,7 @@
-import { Falsy, ComettaStyle } from '../types';
+import { ComettaStyle, Falsy } from '../types';
 import nativeProps from '../resolver/nativeProps';
 import aliasProps from '../resolver/aliasProps';
-import { __cometta_aliases__, __cometta_variables__, isWeb, remInPixel } from '../constants';
+import { __cometta_aliases__, __cometta_polyfill__, __cometta_variables__, isWeb } from '../constants';
 
 const parseUnit = (value: any) => {
   return isNaN(value) ? value : Number(value);
@@ -60,7 +60,7 @@ export default function jss(...styles: (ComettaStyle | string | Falsy)[]) {
 
         // Resolve VARS
         if (typeof value === 'string') {
-          value = value.replace(/var\(([\w\-\_]+)\)+/g, (original: string, varName: string) => {
+          value = value.replace(/var\(([\w\-_]+)\)+/g, (original: string, varName: string) => {
             return varName in __cometta_variables__ ? (__cometta_variables__[varName] as string) : original;
           });
         }
@@ -133,16 +133,20 @@ export default function jss(...styles: (ComettaStyle | string | Falsy)[]) {
   for (let prop in result) {
     let value = result[prop];
 
-    // REM polyfill
-    if (typeof value === 'string' && !isWeb) {
-      const remRegex = /([+-]?([0-9]*[.])?[0-9]+)rem/gi;
-      if (remRegex.test(value)) {
-        value = value.replace(remRegex, ($x, $1) => {
-          return `${$x ? $1 * remInPixel : 0}`;
-        });
+    // Polyfills
+    if (!isWeb) {
+      Object.entries(__cometta_polyfill__.units).forEach(([unitName, unitValue]) => {
+        if (typeof value !== 'string') {
+          return;
+        }
 
-        value = parseUnit(value);
-      }
+        const regex = new RegExp(`([+-]?([0-9]*[.])?[0-9]+)${unitName}`, 'gi');
+
+        value = value.replace(regex, ($x, $1) => {
+          const newValue = unitValue instanceof Function ? unitValue($1) : unitValue * $1;
+          return `${$x ? newValue : 0}px`;
+        });
+      });
     }
 
     // PX

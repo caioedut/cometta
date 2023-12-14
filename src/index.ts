@@ -5,6 +5,7 @@ import alias from './core/alias';
 import variables from './core/variables';
 import create from './core/create';
 import normalize from './core/normalize';
+import polyfill from './core/polyfill';
 
 const cometta = {
   alias,
@@ -14,32 +15,19 @@ const cometta = {
   sheet,
   variables,
   normalize,
+  polyfill,
 };
 
-// cometta.alias({
-//   f: 'flex',
-// });
-//
-// cometta.variables({
-//   primary: '#f063f1',
-// });
+cometta.polyfill({
+  units: {
+    rem: 16,
+  },
+});
 
-// console.log(
-//   cometta.css({
-//     padding: '15px 10px 5px 5px',
-//   }),
-// );
-
-// console.log(
-//   cometta.css(
-//     {
-//       bg: 'blue',
-//       color: 'var(primary)',
-//     },
-//     {
-//       bg: 'red',
-//     },
-//   ),
-// );
+console.log(
+  cometta.jss({
+    width: '1rem',
+  }),
+);
 
 export default cometta;
