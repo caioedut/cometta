@@ -1,10 +1,10 @@
 import encrypt from '../encrypt';
-import { __tenize_classes__ } from '../constants';
-import { Falsy, TenizeStyle } from '../types';
+import { __cometta_classes__ } from '../constants';
+import { Falsy, ComettaStyle } from '../types';
 import jss from './jss';
 import css from './css';
 
-export default function sheet(...styles: (TenizeStyle | string | Falsy)[]) {
+export default function sheet(...styles: (ComettaStyle | string | Falsy)[]) {
   const stylesJss = jss(...styles);
 
   const cssClass = `t${encrypt(JSON.stringify(stylesJss))}`;
@@ -20,15 +20,15 @@ export default function sheet(...styles: (TenizeStyle | string | Falsy)[]) {
     }
   }
 
-  if (!__tenize_classes__.includes(cssClass)) {
-    __tenize_classes__.push(cssClass);
+  if (!__cometta_classes__.includes(cssClass)) {
+    __cometta_classes__.push(cssClass);
 
     if (typeof document !== 'undefined') {
       const head = document.head || document.getElementsByTagName('head')[0];
       const tag = document.createElement('style');
 
       tag.setAttribute('type', 'text/css');
-      tag.setAttribute('data-tenize', 'true');
+      tag.setAttribute('data-cometta', 'true');
       tag.innerHTML = cssText;
 
       head.appendChild(tag);

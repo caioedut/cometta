@@ -1,8 +1,8 @@
-import tenize from '../src';
+import cometta from '../src';
 
 describe('css()', () => {
   test('must convert jss to css string', () => {
-    const style = tenize.css({
+    const style = cometta.css({
       backgroundColor: '#000000',
       color: '#FFFFFF',
     });
@@ -11,11 +11,11 @@ describe('css()', () => {
   });
 
   test('must resolve variables', () => {
-    tenize.variables({
+    cometta.variables({
       primary: '#9EA1D4',
     });
 
-    const style = tenize.css({
+    const style = cometta.css({
       color: 'var(primary)',
     });
 
@@ -23,7 +23,7 @@ describe('css()', () => {
   });
 
   test('must resolve numeric values to px', () => {
-    const style = tenize.css({
+    const style = cometta.css({
       padding: 4,
     });
 

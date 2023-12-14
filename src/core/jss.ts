@@ -1,10 +1,10 @@
-import { Falsy, TenizeStyle } from '../types';
+import { Falsy, ComettaStyle } from '../types';
 import nativeProps from '../resolver/nativeProps';
 import aliasProps from '../resolver/aliasProps';
-import { __tenize_aliases__, __tenize_variables__ } from '../constants';
+import { __cometta_aliases__, __cometta_variables__ } from '../constants';
 
-export default function jss(...styles: (TenizeStyle | string | Falsy)[]) {
-  let result: TenizeStyle = {};
+export default function jss(...styles: (ComettaStyle | string | Falsy)[]) {
+  let result: ComettaStyle = {};
 
   for (let currentStyles of styles) {
     if (!currentStyles) {
@@ -41,7 +41,7 @@ export default function jss(...styles: (TenizeStyle | string | Falsy)[]) {
         prop = prop.replace(/([\-_]\w)/g, (k) => k[1]?.toUpperCase() ?? '');
 
         // extract alias
-        prop = __tenize_aliases__[prop] ?? prop;
+        prop = __cometta_aliases__[prop] ?? prop;
         // @ts-expect-error
         prop = aliasProps[prop] ?? prop;
         // @ts-expect-error
@@ -54,7 +54,7 @@ export default function jss(...styles: (TenizeStyle | string | Falsy)[]) {
         // Resolve VARS
         if (typeof value === 'string') {
           value = value.replace(/var\((.+)\)+/g, (original: string, varName: string) => {
-            return varName in __tenize_variables__ ? (__tenize_variables__[varName] as string) : original;
+            return varName in __cometta_variables__ ? (__cometta_variables__[varName] as string) : original;
           });
         }
 
