@@ -3,7 +3,6 @@ import { Falsy, TenizeStyle } from '../types';
 import jss from './jss';
 import webProps from '../resolver/webProps';
 import aliasProps from '../resolver/aliasProps';
-import common from './common';
 
 export default function css(...styles: (TenizeStyle | string | Falsy)[]) {
   let resolved: { [key: string]: any } = {};
@@ -24,9 +23,6 @@ export default function css(...styles: (TenizeStyle | string | Falsy)[]) {
       attr = aliasProps[attr] ?? attr;
       // @ts-expect-error
       attr = webProps[attr] ?? attr;
-
-      // Common value resolve
-      value = common(value);
 
       // Insert PX on pixelable values
       if (typeof value === 'number' && !notPxProps.includes(attr as any)) {
