@@ -16,20 +16,17 @@ const cometta = {
   normalize,
 };
 
-cometta.alias({
-  f: 'flex',
-});
-
-cometta.variables({
-  primary: '#f063f1',
-});
+// cometta.alias({
+//   f: 'flex',
+// });
+//
+// cometta.variables({
+//   primary: '#f063f1',
+// });
 
 // console.log(
-//   cometta.jss({
-//     borderTop: '1px solid red',
-//     borderLeft: 'solid red 1px',
-//     borderRight: 'red 1px solid',
-//     borderBottom: 'red solid 1px',
+//   cometta.css({
+//     padding: '15px 10px 5px 5px',
 //   }),
 // );
 

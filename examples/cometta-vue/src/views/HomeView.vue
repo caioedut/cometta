@@ -27,16 +27,14 @@ const styles = cometta.create({
   button: {
     cursor: 'pointer',
     border: '1px solid var(secondary)',
-    background:
-      'linear-gradient(to bottom right, var(secondary), var(primary) 75%)',
+    background: 'linear-gradient(to bottom right, var(secondary), var(primary) 75%)',
     'border-radius': 16,
     color: '#FFFFFF',
     padding: '16px 32px',
     fontWeight: 'bold',
     text_align: 'center',
     '&:hover': {
-      background:
-        'linear-gradient(to bottom right, var(secondary), var(secondary) 75%)',
+      background: 'linear-gradient(to bottom right, var(secondary), var(secondary) 75%)',
     },
   },
 });
