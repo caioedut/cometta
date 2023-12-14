@@ -38,7 +38,7 @@ const styles = cometta.create({
      alignItems: 'center',
      justifyContent: 'center',
      height: '100vh',
-     width: '100vh',
+     width: '100vw',
    },
 });
 
@@ -116,7 +116,7 @@ const styles = cometta.create({
      alignItems: 'center',
      justifyContent: 'center',
      height: '100vh',
-     width: '100vh',
+     width: '100vw',
    },
 });
 
