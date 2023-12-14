@@ -10,6 +10,7 @@ const parseUnit = (value: any) => {
 export default function jss(...styles: (ComettaStyle | string | Falsy)[]) {
   let result: ComettaStyle = {};
 
+  // Override props
   for (let currentStyles of styles) {
     if (!currentStyles) {
       continue;
@@ -56,13 +57,6 @@ export default function jss(...styles: (ComettaStyle | string | Falsy)[]) {
 
         if (!prop) {
           continue;
-        }
-
-        // Resolve VARS
-        if (typeof value === 'string') {
-          value = value.replace(/var\(([\w\-_]+)\)+/g, (original: string, varName: string) => {
-            return varName in __cometta_variables__ ? (__cometta_variables__[varName] as string) : original;
-          });
         }
 
         // Resolve borders
@@ -132,6 +126,13 @@ export default function jss(...styles: (ComettaStyle | string | Falsy)[]) {
   // Cast Units
   for (let prop in result) {
     let value = result[prop];
+
+    // Resolve VARS
+    if (typeof value === 'string') {
+      value = value.replace(/var\(([\w\-_]+)\)+/g, (original: string, varName: string) => {
+        return varName in __cometta_variables__ ? (__cometta_variables__[varName] as string) : original;
+      });
+    }
 
     // Polyfills
     if (!isWeb) {

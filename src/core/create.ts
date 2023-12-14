@@ -6,13 +6,11 @@ import sheet from './sheet';
 export default function create(schema: { [key: string]: ComettaStyle | string }) {
   return Object.fromEntries(
     Object.entries(schema).map(([key, styles]) => {
-      const jssStyles = jss(styles);
-
       if (isWeb) {
-        sheet(jssStyles);
+        sheet(styles);
       }
 
-      return [key, jssStyles];
+      return [key, jss(styles)];
     }),
   );
 }

@@ -15,9 +15,7 @@ export const __cometta_variables__: Variables = {};
 export const __cometta_polyfill__: Polyfill = {
   units: {
     rem: 16,
-    vh: 0,
-    vw: 0,
-  },
+  } as Polyfill['units'],
 };
 
 // See https://react-cn.github.io/react/tips/style-props-value-px.html

@@ -93,7 +93,6 @@ const styles = cometta.create({
 });
 ```
 
-
 ## Polyfill
 
 Used to define some values when the environment is not standardized. Example for React Native:
@@ -105,8 +104,8 @@ import { Dimensions, View } from 'react-native';
 cometta.polyfill({
    units: {
      rem: 16,
-     vw: () => Dimensions.get('window').width / 100,
-     vh: () => Dimensions.get('window').height / 100,
+     vw: (value) => value * Dimensions.get('window').width / 100,
+     vh: (value) => value * Dimensions.get('window').height / 100,
    }
 });
 
