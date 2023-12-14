@@ -1,10 +1,10 @@
 import encrypt from '../encrypt';
 import { __tenize_classes__ } from '../constants';
-import { TenizeStyle } from '../types';
+import { Falsy, TenizeStyle } from '../types';
 import jss from './jss';
 import css from './css';
 
-export default function sheet(...styles: (TenizeStyle | string)[]) {
+export default function sheet(...styles: (TenizeStyle | string | Falsy)[]) {
   const stylesJss = jss(...styles);
 
   const cssClass = `t${encrypt(JSON.stringify(stylesJss))}`;
@@ -14,7 +14,7 @@ export default function sheet(...styles: (TenizeStyle | string)[]) {
   for (let attr in stylesJss) {
     let value = stylesJss[attr];
 
-    if (attr.startsWith('&')) {
+    if (typeof value === 'object' && value && attr.startsWith('&')) {
       attr = attr.substring(1);
       cssText += `\n.${cssClass}${attr} { ${css(value)} }`;
     }

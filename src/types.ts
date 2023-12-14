@@ -1,5 +1,7 @@
 import type { Properties } from 'csstype';
 
+export type Falsy = undefined | null | false | 0 | -0 | 0n | '';
+
 export type Alias = {
   [key: string]: string;
 };
@@ -9,7 +11,5 @@ export type Variables = {
 };
 
 export type TenizeStyle = Properties & {
-  [key: string]: any;
+  [key: string]: string | number | TenizeStyle;
 };
-
-export type TenizeStyleWeb = Properties;

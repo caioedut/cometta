@@ -1,11 +1,11 @@
 import { __tenize_aliases__, notPxProps } from '../constants';
-import { TenizeStyle } from '../types';
+import { Falsy, TenizeStyle } from '../types';
 import jss from './jss';
 import webProps from '../resolver/webProps';
 import aliasProps from '../resolver/aliasProps';
 import common from './common';
 
-export default function css(...styles: (TenizeStyle | string)[]) {
+export default function css(...styles: (TenizeStyle | string | Falsy)[]) {
   let resolved: { [key: string]: any } = {};
 
   for (let currentStyles of styles) {
