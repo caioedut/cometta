@@ -38,17 +38,17 @@ const styles = cometta.create({
 
 ### Vanilla
 ```jsx
-document.body.innerHTML = `<main class="${styles.container}"></main>`
+document.body.innerHTML = `<main class="${cometta.sheet(styles.container)}"></main>`
 ```
 
 ### React
 
 ```jsx
-<main className={styles.container}></main>
+<main className={cometta.sheet(styles.container)}></main>
 ```
 
 ### React Native
 
 ```jsx
-<View style={styles.container}></View>
+<View style={cometta.jss(styles.container)}></View>
 ```

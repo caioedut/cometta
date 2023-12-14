@@ -29,7 +29,7 @@ export default function sheet(...styles: (ComettaStyle | string | Falsy)[]) {
 
       tag.setAttribute('type', 'text/css');
       tag.setAttribute('data-cometta', 'true');
-      tag.innerHTML = cssText;
+      tag.textContent = cssText;
 
       head.appendChild(tag);
     }
