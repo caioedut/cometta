@@ -17,7 +17,8 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "test": "tsx scripts/test.ts",
-    "build": "tsx scripts/build.ts"
+    "build": "tsx scripts/build.ts",
+    "publish:stable": "tsx scripts/publish.ts"
   },
   "devDependencies": {
     "@types/jest": "^29.5.6",
