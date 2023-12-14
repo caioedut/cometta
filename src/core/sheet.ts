@@ -24,14 +24,12 @@ export default function sheet(...styles: (ComettaStyle | string | Falsy)[]) {
     __cometta_classes__.push(cssClass);
 
     if (typeof document !== 'undefined') {
-      const head = document.head || document.getElementsByTagName('head')[0];
       const tag = document.createElement('style');
-
       tag.setAttribute('type', 'text/css');
-      tag.setAttribute('data-cometta', 'true');
+      tag.setAttribute('data-cometta', cssClass);
       tag.textContent = cssText;
 
-      head.appendChild(tag);
+      (document.head || document.getElementsByTagName('head')[0]).appendChild(tag);
     }
   }
 

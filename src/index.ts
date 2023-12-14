@@ -4,6 +4,7 @@ import sheet from './core/sheet';
 import alias from './core/alias';
 import variables from './core/variables';
 import create from './core/create';
+import normalize from './core/normalize';
 
 const cometta = {
   alias,
@@ -12,6 +13,7 @@ const cometta = {
   create,
   sheet,
   variables,
+  normalize,
 };
 
 cometta.alias({
