@@ -19,6 +19,14 @@
 <br>
 <br>
 
+## CSS Normalize
+
+```js
+import cometta from 'cometta';
+
+cometta.normalize();
+```
+
 ## Usage
 
 ```js
