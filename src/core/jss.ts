@@ -53,7 +53,7 @@ export default function jss(...styles: (ComettaStyle | string | Falsy)[]) {
 
         // Resolve VARS
         if (typeof value === 'string') {
-          value = value.replace(/var\((.+)\)+/g, (original: string, varName: string) => {
+          value = value.replace(/var\(([\w\-\_]+)\)+/g, (original: string, varName: string) => {
             return varName in __cometta_variables__ ? (__cometta_variables__[varName] as string) : original;
           });
         }
