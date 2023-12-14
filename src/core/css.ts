@@ -1,10 +1,10 @@
-import { __tenize_aliases__, notPxProps } from '../constants';
-import { Falsy, TenizeStyle } from '../types';
+import { __cometta_aliases__, notPxProps } from '../constants';
+import { Falsy, ComettaStyle } from '../types';
 import jss from './jss';
 import webProps from '../resolver/webProps';
 import aliasProps from '../resolver/aliasProps';
 
-export default function css(...styles: (TenizeStyle | string | Falsy)[]) {
+export default function css(...styles: (ComettaStyle | string | Falsy)[]) {
   let resolved: { [key: string]: any } = {};
 
   for (let currentStyles of styles) {
@@ -18,7 +18,7 @@ export default function css(...styles: (TenizeStyle | string | Falsy)[]) {
       }
 
       // extract alias
-      attr = __tenize_aliases__[attr] ?? attr;
+      attr = __cometta_aliases__[attr] ?? attr;
       // @ts-expect-error
       attr = aliasProps[attr] ?? attr;
       // @ts-expect-error

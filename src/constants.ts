@@ -1,10 +1,10 @@
 import { Alias, Variables } from './types';
 
-export const __tenize_classes__: string[] = [];
+export const __cometta_classes__: string[] = [];
 
-export const __tenize_aliases__: Alias = {};
+export const __cometta_aliases__: Alias = {};
 
-export const __tenize_variables__: Variables = {};
+export const __cometta_variables__: Variables = {};
 
 export const isWeb = Boolean(typeof window !== 'undefined' && window.document);
 

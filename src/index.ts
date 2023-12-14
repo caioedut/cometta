@@ -5,7 +5,7 @@ import alias from './core/alias';
 import variables from './core/variables';
 import create from './core/create';
 
-const tenize = {
+const cometta = {
   alias,
   jss,
   css,
@@ -14,16 +14,16 @@ const tenize = {
   variables,
 };
 
-tenize.alias({
+cometta.alias({
   f: 'flex',
 });
 
-tenize.variables({
+cometta.variables({
   primary: '#f063f1',
 });
 
 // console.log(
-//   tenize.jss({
+//   cometta.jss({
 //     borderTop: '1px solid red',
 //     borderLeft: 'solid red 1px',
 //     borderRight: 'red 1px solid',
@@ -32,7 +32,7 @@ tenize.variables({
 // );
 
 // console.log(
-//   tenize.css(
+//   cometta.css(
 //     {
 //       bg: 'blue',
 //       color: 'var(primary)',
@@ -43,4 +43,4 @@ tenize.variables({
 //   ),
 // );
 
-export default tenize;
+export default cometta;
