@@ -104,7 +104,6 @@ export default function jss(...styles: (TenizeStyle | string | Falsy)[]) {
         }
 
         if (prop) {
-          // @ts-expect-error
           result[prop] = value;
         }
       }
