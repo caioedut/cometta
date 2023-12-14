@@ -1,13 +1,17 @@
-import { TenizeStyle } from '../types';
+import { Falsy, TenizeStyle } from '../types';
 import common from './common';
 import nativeProps from '../resolver/nativeProps';
 import aliasProps from '../resolver/aliasProps';
 import { __tenize_aliases__ } from '../constants';
 
-export default function jss(...styles: (TenizeStyle | string)[]) {
+export default function jss(...styles: (TenizeStyle | string | Falsy)[]) {
   let result: TenizeStyle = {};
 
   for (let currentStyles of styles) {
+    if (!currentStyles) {
+      continue;
+    }
+
     if (typeof currentStyles === 'string') {
       const rules = currentStyles
         .split(';')
@@ -51,6 +55,7 @@ export default function jss(...styles: (TenizeStyle | string)[]) {
         }
 
         if (attr) {
+          // @ts-expect-error
           result[attr] = value;
         }
       }

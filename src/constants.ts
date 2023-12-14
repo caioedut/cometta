@@ -6,6 +6,12 @@ export const __tenize_aliases__: Alias = {};
 
 export const __tenize_variables__: Variables = {};
 
+export const isWeb = Boolean(typeof window !== 'undefined' && window.document);
+
+export const isNative = typeof navigator !== 'undefined' && navigator?.product === 'ReactNative';
+
+export const isServer = !isWeb && !isNative;
+
 // See https://react-cn.github.io/react/tips/style-props-value-px.html
 export const notPxProps = [
   'animationIterationCount',
