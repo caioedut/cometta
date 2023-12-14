@@ -52,3 +52,9 @@ document.body.innerHTML = `<main class="${cometta.sheet(styles.container)}"></ma
 ```jsx
 <View style={cometta.jss(styles.container)}></View>
 ```
+
+### Vue
+
+```vue
+<main :class="cometta.sheet(styles.container)"></main>
+```
