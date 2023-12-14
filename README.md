@@ -18,3 +18,37 @@
 
 <br>
 <br>
+
+## Usage
+
+```js
+import cometta from 'cometta';
+
+const styles = cometta.create({
+   container: {
+     display: 'flex',
+     alignItems: 'center',
+     justifyContent: 'center',
+     height: '100vh',
+     width: '100vh',
+   },
+});
+
+```
+
+### Vanilla
+```jsx
+document.body.innerHTML = `<main class="${styles.container}"></main>`
+```
+
+### React
+
+```jsx
+<main className={styles.container}></main>
+```
+
+### React Native
+
+```jsx
+<View style={styles.container}></View>
+```
