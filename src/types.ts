@@ -10,6 +10,6 @@ export type Variables = {
   [key: string]: string | number;
 };
 
-export type TenizeStyle = Properties & {
+export type TenizeStyle = Properties<(string & {}) | (number & {})> & {
   [key: string]: string | number | TenizeStyle;
 };
