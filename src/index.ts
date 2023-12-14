@@ -18,16 +18,4 @@ const cometta = {
   polyfill,
 };
 
-cometta.polyfill({
-  units: {
-    rem: 16,
-  },
-});
-
-console.log(
-  cometta.jss({
-    width: '1rem',
-  }),
-);
-
 export default cometta;
