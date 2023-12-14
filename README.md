@@ -19,7 +19,7 @@
 <br>
 <br>
 
-## CSS Normalize
+## Normalize CSS
 
 ```js
 import cometta from 'cometta';
