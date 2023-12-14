@@ -23,10 +23,11 @@ tenize.variables({
 });
 
 // console.log(
-//   tenize.props({
-//     display: 'flex',
-//     alignItems: 'center',
-//     justifyContent: 'center',
+//   tenize.jss({
+//     borderTop: '1px solid red',
+//     borderLeft: 'solid red 1px',
+//     borderRight: 'red 1px solid',
+//     borderBottom: 'red solid 1px',
 //   }),
 // );
 
