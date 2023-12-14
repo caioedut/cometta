@@ -4,7 +4,6 @@ import sheet from './core/sheet';
 import alias from './core/alias';
 import variables from './core/variables';
 import create from './core/create';
-import props from './core/props';
 
 const tenize = {
   alias,
@@ -13,7 +12,6 @@ const tenize = {
   create,
   sheet,
   variables,
-  props,
 };
 
 tenize.alias({

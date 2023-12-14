@@ -1,10 +1,18 @@
 import { TenizeStyle } from '../types';
 import jss from './jss';
+import { isWeb } from '../constants';
+import sheet from './sheet';
 
 export default function create(schema: { [key: string]: TenizeStyle | string }) {
   return Object.fromEntries(
     Object.entries(schema).map(([key, styles]) => {
-      return [key, jss(styles)];
+      const jssStyles = jss(styles);
+
+      if (isWeb) {
+        sheet(jssStyles);
+      }
+
+      return [key, jssStyles];
     }),
   );
 }
