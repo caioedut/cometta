@@ -1,7 +1,11 @@
 import { Falsy, ComettaStyle } from '../types';
 import nativeProps from '../resolver/nativeProps';
 import aliasProps from '../resolver/aliasProps';
-import { __cometta_aliases__, __cometta_variables__ } from '../constants';
+import { __cometta_aliases__, __cometta_variables__, isWeb, remInPixel } from '../constants';
+
+const parseUnit = (value: any) => {
+  return isNaN(value) ? value : Number(value);
+};
 
 export default function jss(...styles: (ComettaStyle | string | Falsy)[]) {
   let result: ComettaStyle = {};
@@ -31,6 +35,9 @@ export default function jss(...styles: (ComettaStyle | string | Falsy)[]) {
         let prop: string | null = attr;
         let value = currentStyles[prop];
 
+        const valueTrim = `${value ?? ''}`.trim();
+        const valueSplit = valueTrim.split(/\s/g).filter((item: string) => item.trim());
+
         // recursive object jss
         if (typeof value === 'object' && value) {
           result[prop] = jss(value);
@@ -58,10 +65,7 @@ export default function jss(...styles: (ComettaStyle | string | Falsy)[]) {
           });
         }
 
-        if (typeof value === 'string' && /^-?[\d.]+px$/.test(value)) {
-          value = Number(value.replace(/px$/, ''));
-        }
-
+        // Resolve borders
         if (['border', 'borderTop', 'borderBottom', 'borderLeft', 'borderRight'].includes(prop)) {
           if (value) {
             const preffix = prop;
@@ -79,9 +83,6 @@ export default function jss(...styles: (ComettaStyle | string | Falsy)[]) {
               'initial',
               'inherit',
             ];
-
-            const valueTrim = `${value ?? ''}`.trim();
-            const valueSplit = valueTrim.split(/\s/g).filter((item: string) => item.trim());
 
             const styleIndex = valueSplit.findIndex((item: string) => types.includes(item));
             const borderStyle = styleIndex >= 0 ? valueSplit.splice(styleIndex, 1).shift() : 'solid';
@@ -103,11 +104,53 @@ export default function jss(...styles: (ComettaStyle | string | Falsy)[]) {
           }
         }
 
+        // Resolve padding/margin arrays
+        ['padding', 'margin'].forEach((prefix) => {
+          if (prop === prefix) {
+            const [v1, v2, v3, v4] = valueSplit;
+
+            if (valueSplit.length > 1) {
+              prop = null;
+
+              Object.assign(result, {
+                [`${prefix}Top`]: parseUnit(v1),
+                [`${prefix}Right`]: parseUnit(v2 ?? v1),
+                [`${prefix}Bottom`]: parseUnit(v3 ?? v1),
+                [`${prefix}Left`]: parseUnit(v4 ?? v2 ?? v1),
+              });
+            }
+          }
+        });
+
         if (prop) {
           result[prop] = value;
         }
       }
     }
+  }
+
+  // Cast Units
+  for (let prop in result) {
+    let value = result[prop];
+
+    // REM polyfill
+    if (typeof value === 'string' && !isWeb) {
+      const remRegex = /([+-]?([0-9]*[.])?[0-9]+)rem/gi;
+      if (remRegex.test(value)) {
+        value = value.replace(remRegex, ($x, $1) => {
+          return `${$x ? $1 * remInPixel : 0}`;
+        });
+
+        value = parseUnit(value);
+      }
+    }
+
+    // PX
+    if (typeof value === 'string' && /^-?[\d.]+px$/.test(value)) {
+      value = Number(value.replace(/px$/, ''));
+    }
+
+    result[prop] = value;
   }
 
   return result;
