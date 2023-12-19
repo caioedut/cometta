@@ -9,14 +9,23 @@ export default function sheet(...styles: (ComettaStyle | string | Falsy)[]) {
 
   const cssClass = `t${encrypt(JSON.stringify(stylesJss))}`;
 
+  let cssMedia = '';
   let cssText = `.${cssClass} { ${css(stylesJss)} }`;
 
   for (let attr in stylesJss) {
     let value = stylesJss[attr];
 
-    if (typeof value === 'object' && value && attr.startsWith('&')) {
-      attr = attr.substring(1);
-      cssText += `\n.${cssClass}${attr} { ${css(value)} }`;
+    if (value && typeof value === 'object') {
+      // Nested
+      if (attr.startsWith('&')) {
+        attr = attr.substring(1);
+        cssText += `\n.${cssClass}${attr} { ${css(value)} }`;
+      }
+
+      // Media query
+      if (attr.startsWith('@')) {
+        cssMedia += `${attr} { .${cssClass} { ${css(value)} } }`;
+      }
     }
   }
 
@@ -27,7 +36,7 @@ export default function sheet(...styles: (ComettaStyle | string | Falsy)[]) {
       const tag = document.createElement('style');
       tag.setAttribute('type', 'text/css');
       tag.setAttribute('data-cometta', cssClass);
-      tag.textContent = cssText;
+      tag.textContent = `${cssText}\n${cssMedia}`;
 
       (document.head || document.getElementsByTagName('head')[0]).appendChild(tag);
     }
