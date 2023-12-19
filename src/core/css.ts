@@ -17,6 +17,10 @@ export default function css(...styles: (ComettaStyle | string | Falsy)[]) {
         continue;
       }
 
+      if (attr.startsWith('@')) {
+        continue;
+      }
+
       // extract alias
       attr = __cometta_aliases__[attr] ?? attr;
       // @ts-expect-error

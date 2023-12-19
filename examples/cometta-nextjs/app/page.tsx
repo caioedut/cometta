@@ -10,7 +10,7 @@ cometta.variables({
 
 const styles = cometta.create({
   container: {
-    backgroundColor: '#FFEBCD',
+    backgroundColor: '#E8C897',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -19,6 +19,9 @@ const styles = cometta.create({
     width: '100vw',
     gap: 16,
     padding: 16,
+    '@media (min-width: 769px)': {
+      backgroundColor: '#FFEBCD',
+    },
   },
   icon: {
     fontSize: 48,
