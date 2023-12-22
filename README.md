@@ -102,6 +102,10 @@ import cometta from 'cometta';
 import { Dimensions, View } from 'react-native';
 
 cometta.polyfill({
+   dimensions: {
+       height: () => Dimensions.get('window').height,
+       width: () => Dimensions.get('window').width,
+   },
    units: {
      rem: 16,
      vw: (value) => value * Dimensions.get('window').width / 100,
@@ -127,4 +131,21 @@ function App() {
   );
 }
 
+```
+
+## Media Query (`@media`)
+
+Works on `cometta.sheet()` with no configuration and on `cometta.jss()` using polyfill (dimensions).
+
+```js
+import cometta from 'cometta';
+
+const styles = cometta.create({
+   container: {
+     backgroundColor: 'red',
+     '@media (min-width: 769px)': {
+       backgroundColor: 'green',
+     }
+   },
+});
 ```
