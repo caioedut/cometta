@@ -13,6 +13,10 @@ export const __cometta_aliases__: Alias = {};
 export const __cometta_variables__: Variables = {};
 
 export const __cometta_polyfill__: Polyfill = {
+  dimensions: {
+    height: () => 0,
+    width: () => 0,
+  },
   units: {
     rem: 16,
   } as Polyfill['units'],

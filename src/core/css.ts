@@ -1,32 +1,25 @@
-import { __cometta_aliases__, notPxProps } from '../constants';
-import { Falsy, ComettaStyle } from '../types';
-import jss from './jss';
-import webProps from '../resolver/webProps';
-import aliasProps from '../resolver/aliasProps';
+import { notPxProps } from '../constants';
+import { ComettaStyle, Falsy } from '../types';
+import prepare from './prepare';
 
 export default function css(...styles: (ComettaStyle | string | Falsy)[]) {
   let resolved: { [key: string]: any } = {};
 
   for (let currentStyles of styles) {
-    const stylesJss = jss(currentStyles);
+    const currentStyle = prepare(currentStyles);
 
-    for (let attr in stylesJss) {
-      let value = stylesJss[attr];
+    for (let attr in currentStyle) {
+      let value = currentStyle[attr];
 
+      // Inline styles doesn't support nested css
       if (attr.startsWith('&')) {
         continue;
       }
 
+      // Inline styles doesn't support @media queries
       if (attr.startsWith('@')) {
         continue;
       }
-
-      // extract alias
-      attr = __cometta_aliases__[attr] ?? attr;
-      // @ts-expect-error
-      attr = aliasProps[attr] ?? attr;
-      // @ts-expect-error
-      attr = webProps[attr] ?? attr;
 
       // Insert PX on pixelable values
       if (typeof value === 'number' && !notPxProps.includes(attr as any)) {

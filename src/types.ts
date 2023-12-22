@@ -23,6 +23,10 @@ export type ComettaStyle = Properties<(string & {}) | (number & {})> & {
 };
 
 export type Polyfill = {
+  dimensions: {
+    height: () => number;
+    width: () => number;
+  };
   units: {
     rem: number | ((value: number) => number);
     vh: number | ((value: number) => number);

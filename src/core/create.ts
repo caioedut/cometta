@@ -1,7 +1,7 @@
 import { ComettaStyle } from '../types';
-import jss from './jss';
 import { isWeb } from '../constants';
 import sheet from './sheet';
+import prepare from './prepare';
 
 export default function create(schema: { [key: string]: ComettaStyle | string }) {
   return Object.fromEntries(
@@ -10,7 +10,7 @@ export default function create(schema: { [key: string]: ComettaStyle | string })
         sheet(styles);
       }
 
-      return [key, jss(styles)];
+      return [key, prepare(styles)];
     }),
   );
 }
