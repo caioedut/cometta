@@ -1,19 +1,19 @@
 import encrypt from '../encrypt';
 import { __cometta_classes__ } from '../constants';
-import { Falsy, ComettaStyle } from '../types';
-import jss from './jss';
+import { ComettaStyle, Falsy } from '../types';
 import css from './css';
+import prepare from './prepare';
 
 export default function sheet(...styles: (ComettaStyle | string | Falsy)[]) {
-  const stylesJss = jss(...styles);
+  const currentStyle = prepare(...styles);
 
-  const cssClass = `t${encrypt(JSON.stringify(stylesJss))}`;
+  const cssClass = `t${encrypt(JSON.stringify(currentStyle))}`;
 
   let cssMedia = '';
-  let cssText = `.${cssClass} { ${css(stylesJss)} }`;
+  let cssText = `.${cssClass} { ${css(currentStyle)} }`;
 
-  for (let attr in stylesJss) {
-    let value = stylesJss[attr];
+  for (let attr in currentStyle) {
+    let value = currentStyle[attr];
 
     if (value && typeof value === 'object') {
       // Nested
