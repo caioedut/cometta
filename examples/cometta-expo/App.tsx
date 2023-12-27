@@ -2,15 +2,8 @@ import { Dimensions, Pressable, Text, View } from 'react-native';
 import cometta from 'cometta';
 
 cometta.polyfill({
-  dimensions: {
-    height: () => Dimensions.get('window').height,
-    width: () => Dimensions.get('window').width,
-  },
-  units: {
-    rem: 16, // 1rem = 16px
-    vw: (value) => (value * Dimensions.get('window').width) / 100,
-    vh: (value) => (value * Dimensions.get('window').height) / 100,
-  },
+  screenWidth: Dimensions.get('window').width,
+  screenHeight: () => Dimensions.get('window').height,
 });
 
 cometta.variables({

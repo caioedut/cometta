@@ -130,36 +130,58 @@ export default function prepare(...styles: (ComettaStyle | string | Falsy)[]) {
     }
   }
 
+  const fontSize =
+    __cometta_polyfill__.fontSize instanceof Function ? __cometta_polyfill__.fontSize() : __cometta_polyfill__.fontSize;
+
+  const screenWidth =
+    __cometta_polyfill__.screenWidth instanceof Function
+      ? __cometta_polyfill__.screenWidth()
+      : __cometta_polyfill__.screenWidth;
+
+  const screenHeight =
+    __cometta_polyfill__.screenHeight instanceof Function
+      ? __cometta_polyfill__.screenHeight()
+      : __cometta_polyfill__.screenHeight;
+
   // Cast Units
   for (let prop in result) {
     let value = result[prop];
 
-    // Resolve VARS
     if (typeof value === 'string') {
+      // Resolve VARS
       value = value.replace(/var\(([\w\-_]+)\)+/g, (original: string, varName: string) => {
         return varName in __cometta_variables__ ? (__cometta_variables__[varName] as string) : original;
       });
-    }
 
-    // Polyfills
-    if (!isWeb) {
-      Object.entries(__cometta_polyfill__.units).forEach(([unitName, unitValue]) => {
-        if (typeof value !== 'string') {
-          return;
+      if (!isWeb) {
+        // Polyfill REM
+        if (fontSize) {
+          value = value.replace(/([+-]?([0-9]*[.])?[0-9]+)rem/gi, ($x, $1) => {
+            const newValue = fontSize * $1;
+            return `${$x ? newValue : 0}px`;
+          });
         }
 
-        const regex = new RegExp(`([+-]?([0-9]*[.])?[0-9]+)${unitName}`, 'gi');
+        // Polyfill VW
+        if (screenWidth) {
+          value = value.replace(/([+-]?([0-9]*[.])?[0-9]+)vw/gi, ($x, $1) => {
+            const newValue = (screenWidth * $1) / 100;
+            return `${$x ? newValue : 0}px`;
+          });
+        }
 
-        value = value.replace(regex, ($x, $1) => {
-          const newValue = unitValue instanceof Function ? unitValue($1) : unitValue * $1;
-          return `${$x ? newValue : 0}px`;
-        });
-      });
-    }
+        // Polyfill VH
+        if (screenHeight) {
+          value = value.replace(/([+-]?([0-9]*[.])?[0-9]+)vh/gi, ($x, $1) => {
+            const newValue = (screenHeight * $1) / 100;
+            return `${$x ? newValue : 0}px`;
+          });
+        }
+      }
 
-    // PX
-    if (typeof value === 'string' && /^-?[\d.]+px$/.test(value)) {
-      value = Number(value.replace(/px$/, ''));
+      if (/^-?[\d.]+px$/.test(value)) {
+        value = Number(value.replace(/px$/, ''));
+      }
     }
 
     result[prop] = value;
