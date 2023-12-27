@@ -16,8 +16,6 @@ export default function jss(...styles: (ComettaStyle | string | Falsy)[]) {
 
     // JSS media queries (@media)
     if (attr.startsWith('@')) {
-      const { dimensions } = __cometta_polyfill__;
-
       const mediaQueries = prepare(
         Object.fromEntries(
           attr
@@ -34,6 +32,16 @@ export default function jss(...styles: (ComettaStyle | string | Falsy)[]) {
 
       let mediaMatches = true;
 
+      const screenWidth =
+        __cometta_polyfill__.screenWidth instanceof Function
+          ? __cometta_polyfill__.screenWidth()
+          : __cometta_polyfill__.screenWidth || 0;
+
+      const screenHeight =
+        __cometta_polyfill__.screenHeight instanceof Function
+          ? __cometta_polyfill__.screenHeight()
+          : __cometta_polyfill__.screenHeight || 0;
+
       for (let mediaAttr in mediaQueries) {
         const mediaValue = mediaQueries[mediaAttr];
 
@@ -41,19 +49,19 @@ export default function jss(...styles: (ComettaStyle | string | Falsy)[]) {
           continue;
         }
 
-        if (mediaAttr === 'minWidth' && dimensions.width() < mediaValue) {
+        if (mediaAttr === 'minWidth' && screenWidth < mediaValue) {
           mediaMatches = false;
         }
 
-        if (mediaAttr === 'maxWidth' && dimensions.width() > mediaValue) {
+        if (mediaAttr === 'maxWidth' && screenWidth > mediaValue) {
           mediaMatches = false;
         }
 
-        if (mediaAttr === 'minHeight' && dimensions.height() < mediaValue) {
+        if (mediaAttr === 'minHeight' && screenHeight < mediaValue) {
           mediaMatches = false;
         }
 
-        if (mediaAttr === 'maxHeight' && dimensions.height() > mediaValue) {
+        if (mediaAttr === 'maxHeight' && screenHeight > mediaValue) {
           mediaMatches = false;
         }
       }

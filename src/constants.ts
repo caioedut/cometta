@@ -13,13 +13,9 @@ export const __cometta_aliases__: Alias = {};
 export const __cometta_variables__: Variables = {};
 
 export const __cometta_polyfill__: Polyfill = {
-  dimensions: {
-    height: () => 0,
-    width: () => 0,
-  },
-  units: {
-    rem: 16,
-  } as Polyfill['units'],
+  fontSize: 16,
+  screenWidth: null,
+  screenHeight: null,
 };
 
 // See https://react-cn.github.io/react/tips/style-props-value-px.html
