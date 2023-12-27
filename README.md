@@ -102,15 +102,9 @@ import cometta from 'cometta';
 import { Dimensions, View } from 'react-native';
 
 cometta.polyfill({
-   dimensions: {
-       height: () => Dimensions.get('window').height,
-       width: () => Dimensions.get('window').width,
-   },
-   units: {
-     rem: 16,
-     vw: (value) => value * Dimensions.get('window').width / 100,
-     vh: (value) => value * Dimensions.get('window').height / 100,
-   }
+  fontSize: 16,
+  screenWidth: () => Dimensions.get('window').width,
+  screenHeight: () => Dimensions.get('window').height,
 });
 
 const styles = cometta.create({
