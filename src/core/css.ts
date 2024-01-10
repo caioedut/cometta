@@ -9,6 +9,10 @@ export default function css(...styles: (ComettaStyle | string | Falsy)[]) {
     const currentStyle = prepare(currentStyles);
 
     for (let attr in currentStyle) {
+      if (attr === '__className') {
+        continue;
+      }
+
       let value = currentStyle[attr];
 
       // Inline styles doesn't support nested css
