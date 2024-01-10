@@ -7,6 +7,10 @@ export default function jss(...styles: (ComettaStyle | string | Falsy)[]) {
   const resolvedStyle = prepare(...styles);
 
   for (let attr in resolvedStyle) {
+    if (attr === '__className') {
+      continue;
+    }
+
     let value = resolvedStyle[attr];
 
     // JSS doesn't support nested styles

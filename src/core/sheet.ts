@@ -7,7 +7,7 @@ import prepare from './prepare';
 export default function sheet(...styles: (ComettaStyle | string | Falsy)[]) {
   const currentStyle = prepare(...styles);
 
-  const cssClass = `t${encrypt(JSON.stringify(currentStyle))}`;
+  const cssClass = currentStyle?.__className || `c${encrypt(JSON.stringify(currentStyle))}`;
 
   let cssMedia = '';
   let cssText = `.${cssClass} { ${css(currentStyle)} }`;

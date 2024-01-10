@@ -10,6 +10,8 @@ export type RecursivePartial<T> = {
       : T[P];
 };
 
+export type Parser = (value: any, prop: string) => ComettaStyle | Falsy;
+
 export type Alias = {
   [key: string]: string;
 };
@@ -20,7 +22,7 @@ export type Variables = {
 
 export type ComettaStyle = Properties<(string & {}) | (number & {})> & {
   [key: string]: string | number | ComettaStyle;
-};
+} & { __className?: string };
 
 export type Polyfill = {
   fontSize: null | number | (() => number);
