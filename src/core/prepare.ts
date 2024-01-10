@@ -2,7 +2,14 @@ import { ComettaStyle, Falsy } from '../types';
 import aliasProps from '../resolver/aliasProps';
 import nativeProps from '../resolver/nativeProps';
 import webProps from '../resolver/webProps';
-import { __cometta_aliases__, __cometta_polyfill__, __cometta_variables__, isNative, isWeb } from '../constants';
+import {
+  __cometta_aliases__,
+  __cometta_parsers__,
+  __cometta_polyfill__,
+  __cometta_variables__,
+  isNative,
+  isWeb,
+} from '../constants';
 
 const parseUnit = (value: any) => {
   return isNaN(value) ? value : Number(value);
@@ -11,8 +18,12 @@ const parseUnit = (value: any) => {
 export default function prepare(...styles: (ComettaStyle | string | Falsy)[]) {
   let result: ComettaStyle = {};
 
+  const resolved = styles.filter(Boolean).map((item) => {
+    return Array.isArray(item) ? prepare(...item) : item;
+  });
+
   // Override props
-  for (let currentStyles of styles) {
+  for (let currentStyles of resolved) {
     if (!currentStyles) {
       continue;
     }
@@ -37,8 +48,21 @@ export default function prepare(...styles: (ComettaStyle | string | Falsy)[]) {
         let prop: string | null = attr;
         let value = currentStyles[prop];
 
-        const valueTrim = `${value ?? ''}`.trim();
-        const valueSplit = valueTrim.split(/\s/g).filter((item: string) => item.trim());
+        // apply "*" parser
+        if (__cometta_parsers__['*'] instanceof Function) {
+          const parsed = __cometta_parsers__['*'](value, prop);
+
+          if (parsed) {
+            Object.assign(result, parsed);
+            continue;
+          }
+        }
+
+        // custom parsers
+        if (__cometta_parsers__[prop] instanceof Function) {
+          Object.assign(result, __cometta_parsers__[prop](value, prop) || {});
+          continue;
+        }
 
         // recursive object prepare
         if (typeof value === 'object' && value) {
@@ -47,7 +71,9 @@ export default function prepare(...styles: (ComettaStyle | string | Falsy)[]) {
         }
 
         // Parse to camel-case
-        prop = prop.replace(/([\-_]\w)/g, (k) => k[1]?.toUpperCase() ?? '');
+        if (!prop.startsWith('_') && !prop.startsWith('-')) {
+          prop = prop.replace(/([\-_]\w)/g, (k) => k[1]?.toUpperCase() ?? '');
+        }
 
         // extract alias
         prop = __cometta_aliases__[prop] ?? prop;
@@ -65,6 +91,9 @@ export default function prepare(...styles: (ComettaStyle | string | Falsy)[]) {
         if (!prop) {
           continue;
         }
+
+        const valueTrim = `${value ?? ''}`.trim();
+        const valueSplit = valueTrim.split(/\s/g).filter((item: string) => item.trim());
 
         // Resolve borders
         if (['border', 'borderTop', 'borderBottom', 'borderLeft', 'borderRight'].includes(prop)) {

@@ -6,16 +6,33 @@ import variables from './core/variables';
 import create from './core/create';
 import normalize from './core/normalize';
 import polyfill from './core/polyfill';
+import parser from './core/parser';
 
 const cometta = {
-  alias,
   jss,
   css,
   create,
   sheet,
-  variables,
-  normalize,
-  polyfill,
+  alias: (...args: Parameters<typeof alias>) => {
+    alias(...args);
+    return cometta;
+  },
+  parser: (...args: Parameters<typeof parser>) => {
+    parser(...args);
+    return cometta;
+  },
+  variables: (...args: Parameters<typeof variables>) => {
+    variables(...args);
+    return cometta;
+  },
+  normalize: (...args: Parameters<typeof normalize>) => {
+    normalize(...args);
+    return cometta;
+  },
+  polyfill: (...args: Parameters<typeof polyfill>) => {
+    polyfill(...args);
+    return cometta;
+  },
 };
 
 export default cometta;
