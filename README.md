@@ -19,13 +19,19 @@
 <br>
 <br>
 
-## Normalize CSS
+<div align="center">
 
-```js
-import cometta from 'cometta';
+  [Usage](#usage)
+  | [Normalize CSS](#normalize-css)
+  | [Variables](#variables)
+  | [Parsers](#parsers)
+  | [Polyfill](#polyfill)
+  | [Media Query](#media-query-media)
 
-cometta.normalize();
-```
+</div>
+
+<br>
+<br>
 
 ## Example
 
@@ -75,6 +81,14 @@ document.body.innerHTML = `<main class="${cometta.sheet(styles.container)}"></ma
 <main :class="cometta.sheet(styles.container)"></main>
 ```
 
+## Normalize CSS
+
+```js
+import cometta from 'cometta';
+
+cometta.normalize();
+```
+
 ## Variables
 
 Used to create css-like variables.
@@ -95,7 +109,7 @@ const styles = cometta.create({
 
 ## Parsers
 
-You can customize parsers.
+Used to create customized parsers.
 
 ```js
 import cometta from 'cometta';
