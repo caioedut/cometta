@@ -93,6 +93,26 @@ const styles = cometta.create({
 });
 ```
 
+## Parsers
+
+You can customize parsers.
+
+```js
+import cometta from 'cometta';
+
+cometta.parser('bg', (value) => {
+    if (value) {
+        return { backgroundColor: value }
+    }
+});
+
+const styles = cometta.create({
+   container: {
+     bg: 'green'
+   },
+});
+```
+
 ## Polyfill
 
 Used to define some values when the environment is not standardized. Example for React Native:
