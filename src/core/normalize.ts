@@ -1,5 +1,3 @@
-import { __cometta_classes__ } from '../constants';
-
 const styles = `
 /*! Cometta Normalize CSS */
 

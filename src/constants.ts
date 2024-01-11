@@ -6,13 +6,13 @@ export const isNative = typeof navigator !== 'undefined' && navigator?.product =
 
 export const isServer = !isWeb && !isNative;
 
-export const __cometta_classes__: string[] = [];
-
 export const __cometta_aliases__: Alias = {};
 
 export const __cometta_variables__: Variables = {};
 
 export const __cometta_parsers__: Record<string, Parser> = {};
+
+export const __cometta_elements__: Record<string, any> = [];
 
 export const __cometta_polyfill__: Polyfill = {
   fontSize: 16,

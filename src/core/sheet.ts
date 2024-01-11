@@ -1,5 +1,5 @@
 import encrypt from '../encrypt';
-import { __cometta_classes__ } from '../constants';
+import { __cometta_elements__ } from '../constants';
 import { ComettaStyle, Falsy } from '../types';
 import css from './css';
 import prepare from './prepare';
@@ -29,17 +29,15 @@ export default function sheet(...styles: (ComettaStyle | string | Falsy)[]) {
     }
   }
 
-  if (!__cometta_classes__.includes(cssClass)) {
-    __cometta_classes__.push(cssClass);
+  if (typeof document !== 'undefined') {
+    const tag = __cometta_elements__[cssClass] ?? document.createElement('style');
+    __cometta_elements__[cssClass] = tag;
 
-    if (typeof document !== 'undefined') {
-      const tag = document.createElement('style');
-      tag.setAttribute('type', 'text/css');
-      tag.setAttribute('data-cometta', cssClass);
-      tag.textContent = `${cssText}\n${cssMedia}`;
+    tag.setAttribute('type', 'text/css');
+    tag.setAttribute('data-cometta', cssClass);
+    tag.textContent = `${cssText}\n${cssMedia}`;
 
-      (document.head || document.getElementsByTagName('head')[0]).appendChild(tag);
-    }
+    (document.head || document.getElementsByTagName('head')[0]).appendChild(tag);
   }
 
   return cssClass;
