@@ -1,8 +1,8 @@
 import { notPxProps } from '../constants';
-import { ComettaStyle, Falsy } from '../types';
+import { ComettaParam } from '../types';
 import prepare from './prepare';
 
-export default function css(...styles: (ComettaStyle | string | Falsy)[]) {
+export default function css(...styles: (ComettaParam | ComettaParam[])[]) {
   let resolved: { [key: string]: any } = {};
 
   for (let currentStyles of styles) {

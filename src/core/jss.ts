@@ -1,8 +1,8 @@
-import { ComettaStyle, Falsy } from '../types';
+import { ComettaParam } from '../types';
 import { __cometta_polyfill__ } from '../constants';
 import prepare from './prepare';
 
-export default function jss(...styles: (ComettaStyle | string | Falsy)[]) {
+export default function jss(...styles: (ComettaParam | ComettaParam[])[]) {
   const result: { [key: string]: any } = {};
   const resolvedStyle = prepare(...styles);
 
