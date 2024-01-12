@@ -20,12 +20,14 @@ export type Variables = {
   [key: string]: string | number;
 };
 
-export type ComettaStyle = Properties<(string & {}) | (number & {})> & {
-  [key: string]: string | number | ComettaStyle;
-} & { __className?: string };
-
 export type Polyfill = {
   fontSize: null | number | (() => number);
   screenWidth: null | number | (() => number);
   screenHeight: null | number | (() => number);
 };
+
+export type ComettaStyle = Properties<(string & {}) | (number & {})> & {
+  [key: string]: string | number | ComettaStyle;
+} & { __className?: string };
+
+export type ComettaParam = ComettaStyle | string | Falsy;

@@ -7,6 +7,7 @@ import create from './core/create';
 import normalize from './core/normalize';
 import polyfill from './core/polyfill';
 import parser from './core/parser';
+import createStyleSheet from './core/createStyleSheet';
 
 const cometta = {
   jss,
@@ -31,6 +32,10 @@ const cometta = {
   },
   polyfill: (...args: Parameters<typeof polyfill>) => {
     polyfill(...args);
+    return cometta;
+  },
+  createStyleSheet: (...args: Parameters<typeof createStyleSheet>) => {
+    createStyleSheet(...args);
     return cometta;
   },
 };

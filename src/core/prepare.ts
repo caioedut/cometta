@@ -1,4 +1,4 @@
-import { ComettaStyle, Falsy } from '../types';
+import { ComettaParam, ComettaStyle } from '../types';
 import aliasProps from '../resolver/aliasProps';
 import nativeProps from '../resolver/nativeProps';
 import webProps from '../resolver/webProps';
@@ -15,7 +15,7 @@ const parseUnit = (value: any) => {
   return isNaN(value) ? value : Number(value);
 };
 
-export default function prepare(...styles: (ComettaStyle | string | Falsy)[]) {
+export default function prepare(...styles: (ComettaParam | ComettaParam[])[]) {
   let result: ComettaStyle = {};
 
   const resolved = styles.filter(Boolean).map((item) => {

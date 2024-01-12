@@ -1,10 +1,10 @@
 import encrypt from '../encrypt';
 import { __cometta_elements__ } from '../constants';
-import { ComettaStyle, Falsy } from '../types';
+import { ComettaParam } from '../types';
 import css from './css';
 import prepare from './prepare';
 
-export default function sheet(...styles: (ComettaStyle | string | Falsy)[]) {
+export default function sheet(...styles: (ComettaParam | ComettaParam[])[]) {
   const currentStyle = prepare(...styles);
 
   const cssClass = currentStyle?.__className || `c${encrypt(JSON.stringify(currentStyle))}`;
