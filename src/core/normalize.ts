@@ -1,3 +1,5 @@
+import createStyleSheet from './createStyleSheet';
+
 const styles = `
 /*! Cometta Normalize CSS */
 
@@ -368,16 +370,8 @@ template {
 `;
 
 export default function normalize() {
-  if (typeof document !== 'undefined') {
-    let tag = document.querySelector('[data-cometta="normalize"]');
-
-    if (!tag) {
-      tag = document.createElement('style');
-      tag.setAttribute('type', 'text/css');
-      tag.setAttribute('data-cometta', 'normalize');
-      tag.textContent = styles;
-    }
-
-    (document.head || document.getElementsByTagName('head')[0]).prepend(tag);
-  }
+  createStyleSheet(styles, {
+    uniqueId: 'cometta-normalize',
+    prepend: true,
+  });
 }
