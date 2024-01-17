@@ -41,6 +41,7 @@ export default function css(...styles: (ComettaParam | ComettaParam[])[]) {
   }
 
   return Object.entries(resolved)
+    .filter(([, value]) => value !== null && typeof value !== 'undefined')
     .map(([attr, value]) => {
       // Parse to snake-case
       attr = attr.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
