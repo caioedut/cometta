@@ -40,4 +40,6 @@ const cometta = {
   },
 };
 
+export * from './types';
+
 export default cometta;
