@@ -2,14 +2,6 @@ import type { Properties } from 'csstype';
 
 export type Falsy = undefined | null | false | 0 | -0 | 0n | '';
 
-export type RecursivePartial<T> = {
-  [P in keyof T]?: T[P] extends (infer U)[]
-    ? RecursivePartial<U>[]
-    : T[P] extends object | undefined
-      ? RecursivePartial<T[P]>
-      : T[P];
-};
-
 export type Parser = (value: any, prop: string) => ComettaStyle | Falsy;
 
 export type Alias = {
