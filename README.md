@@ -25,6 +25,7 @@
   | [Normalize CSS](#normalize-css)
   | [Variables](#variables)
   | [Parsers](#parsers)
+  | [Units](#units)
   | [Polyfill](#polyfill)
   | [Media Query](#media-query-media)
 
@@ -126,6 +127,25 @@ const styles = cometta.create({
    },
 });
 ```
+
+## Units
+
+Used to resolve a custom value unit.
+
+```js
+import cometta from 'cometta';
+
+cometta.unit('gap', (value) => {
+    return value * 16;
+});
+
+const styles = cometta.create({
+   container: {
+     padding: '1gap'
+   },
+});
+```
+
 
 ## Polyfill
 
