@@ -4,6 +4,8 @@ export type Falsy = undefined | null | false | 0 | -0 | 0n | '';
 
 export type Parser = (value: any, prop: string) => ComettaStyle | Falsy;
 
+export type UnitParser = (value: any, prop: string) => number | string | Falsy;
+
 export type Alias = {
   [key: string]: string;
 };

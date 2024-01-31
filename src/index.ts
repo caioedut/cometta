@@ -7,6 +7,7 @@ import create from './core/create';
 import normalize from './core/normalize';
 import polyfill from './core/polyfill';
 import parser from './core/parser';
+import unit from './core/unit';
 import createStyleSheet from './core/createStyleSheet';
 
 const cometta = {
@@ -20,6 +21,10 @@ const cometta = {
   },
   parser: (...args: Parameters<typeof parser>) => {
     parser(...args);
+    return cometta;
+  },
+  unit: (...args: Parameters<typeof unit>) => {
+    unit(...args);
     return cometta;
   },
   variables: (...args: Parameters<typeof variables>) => {
@@ -39,6 +44,16 @@ const cometta = {
     return cometta;
   },
 };
+
+// console.log(
+//   cometta
+//     .unit('gap', (value) => {
+//       return value * 4;
+//     })
+//     .css({
+//       fontSize: '1gap',
+//     }),
+// );
 
 export * from './types';
 

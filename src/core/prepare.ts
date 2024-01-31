@@ -5,6 +5,7 @@ import webProps from '../resolver/webProps';
 import {
   __cometta_aliases__,
   __cometta_parsers__,
+  __cometta_units__,
   __cometta_polyfill__,
   __cometta_variables__,
   isNative,
@@ -182,6 +183,16 @@ export default function prepare(...styles: (ComettaParam | ComettaParam[])[]) {
         return varName in __cometta_variables__ ? (__cometta_variables__[varName] as string) : original;
       });
 
+      // Resolve UNITS
+      for (const [unitName, unitResolver] of Object.entries(__cometta_units__)) {
+        const regex = new RegExp(`([+-]?([0-9]*[.])?[0-9]+)${unitName}`, 'gi');
+
+        value = value.replace(regex, ($x, $1) => {
+          const newValue = unitResolver($1, prop);
+          return `${$x ? newValue : 0}px`;
+        });
+      }
+
       if (!isWeb) {
         // Polyfill REM
         if (fontSize) {
@@ -208,8 +219,8 @@ export default function prepare(...styles: (ComettaParam | ComettaParam[])[]) {
         }
       }
 
-      if (/^-?[\d.]+px$/.test(value)) {
-        value = Number(value.replace(/px$/, ''));
+      if (/^([+-]?([0-9]*[.])?[0-9]+)px$/gi.test(value)) {
+        value = Number(value.replace(/px$/i, ''));
       }
     }
 
