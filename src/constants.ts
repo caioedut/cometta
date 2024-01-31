@@ -1,4 +1,4 @@
-import { Alias, Parser, Polyfill, Variables } from './types';
+import { Alias, Parser, Polyfill, UnitParser, Variables } from './types';
 
 export const isWeb = Boolean(typeof window !== 'undefined' && window.document);
 
@@ -11,6 +11,8 @@ export const __cometta_aliases__: Alias = {};
 export const __cometta_variables__: Variables = {};
 
 export const __cometta_parsers__: Record<string, Parser> = {};
+
+export const __cometta_units__: Record<string, UnitParser> = {};
 
 export const __cometta_elements__: Record<string, any> = [];
 
