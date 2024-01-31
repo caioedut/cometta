@@ -45,16 +45,6 @@ const cometta = {
   },
 };
 
-// console.log(
-//   cometta
-//     .unit('gap', (value) => {
-//       return value * 4;
-//     })
-//     .css({
-//       fontSize: '1gap',
-//     }),
-// );
-
 export * from './types';
 
 export default cometta;
