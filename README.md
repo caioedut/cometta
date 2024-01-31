@@ -183,7 +183,7 @@ function App() {
 
 ## Media Query (`@media`)
 
-Works on `cometta.sheet()` with no configuration and on `cometta.jss()` using polyfill (dimensions).
+Works on `cometta.sheet()` with no configuration and on `cometta.jss()` using polyfill.
 
 ```js
 import cometta from 'cometta';
