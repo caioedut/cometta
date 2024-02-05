@@ -3,45 +3,43 @@ import { ComettaParam } from '../types';
 import prepare from './prepare';
 
 export default function css(...styles: (ComettaParam | ComettaParam[])[]) {
-  let resolved: { [key: string]: any } = {};
+  const result: { [key: string]: any } = {};
+  const resolvedStyle = prepare(...styles);
 
-  for (let currentStyles of styles) {
-    const currentStyle = prepare(currentStyles);
+  for (let attr in resolvedStyle) {
+    if (attr === '__className') {
+      continue;
+    }
 
-    for (let attr in currentStyle) {
-      if (attr === '__className') {
-        continue;
-      }
+    let value = resolvedStyle[attr];
 
-      let value = currentStyle[attr];
+    // Inline styles doesn't support nested css
+    if (attr.startsWith('&')) {
+      continue;
+    }
 
-      // Inline styles doesn't support nested css
-      if (attr.startsWith('&')) {
-        continue;
-      }
+    // Inline styles doesn't support @media queries
+    if (attr.startsWith('@')) {
+      // TODO: apply style based on polyfill (like in jss) ?
+      // Object.assign(result, media(attr, value as any) || {});
+      continue;
+    }
 
-      // Inline styles doesn't support @media queries
-      if (attr.startsWith('@')) {
-        continue;
-      }
+    // Insert PX on pixelable values
+    if (typeof value === 'number' && !notPxProps.includes(attr as any)) {
+      value = `${value}px`;
+    }
 
-      // Insert PX on pixelable values
-      if (typeof value === 'number' && !notPxProps.includes(attr as any)) {
-        value = `${value}px`;
-      }
+    if (value === '0px') {
+      value = 0;
+    }
 
-      if (value === '0px') {
-        value = 0;
-      }
-
-      if (attr) {
-        resolved[attr] = value;
-      }
+    if (attr) {
+      result[attr] = value;
     }
   }
 
-  return Object.entries(resolved)
-    .filter(([, value]) => value !== null && typeof value !== 'undefined')
+  return Object.entries(result)
     .map(([attr, value]) => {
       // Parse to snake-case
       attr = attr.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
