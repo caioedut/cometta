@@ -71,7 +71,7 @@ export default function prepare(...styles: (ComettaParam | ComettaParam[])[]) {
           continue;
         }
 
-        // Parse to camel-case
+        // parse to camel-case
         if (!prop.startsWith('_') && !prop.startsWith('-')) {
           prop = prop.replace(/([\-_]\w)/g, (k) => k[1]?.toUpperCase() ?? '');
         }
@@ -153,7 +153,7 @@ export default function prepare(...styles: (ComettaParam | ComettaParam[])[]) {
           }
         });
 
-        if (prop) {
+        if (prop && typeof value !== 'undefined') {
           result[prop] = value;
         }
       }
@@ -224,7 +224,9 @@ export default function prepare(...styles: (ComettaParam | ComettaParam[])[]) {
       }
     }
 
-    result[prop] = value;
+    if (typeof value !== 'undefined') {
+      result[prop] = value;
+    }
   }
 
   return result;

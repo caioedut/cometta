@@ -5,15 +5,15 @@ import prepare from './prepare';
 import createStyleSheet from './createStyleSheet';
 
 export default function sheet(...styles: (ComettaParam | ComettaParam[])[]) {
-  const currentStyle = prepare(...styles);
+  const resolvedStyle = prepare(...styles);
 
-  const cssClass = currentStyle?.__className || `c${encrypt(JSON.stringify(currentStyle))}`;
+  const cssClass = resolvedStyle?.__className || `c${encrypt(JSON.stringify(resolvedStyle))}`;
 
   let cssMedia = '';
-  let cssText = `.${cssClass} { ${css(currentStyle)} }`;
+  let cssText = `.${cssClass} { ${css(resolvedStyle)} }`;
 
-  for (let attr in currentStyle) {
-    let value = currentStyle[attr];
+  for (let attr in resolvedStyle) {
+    let value = resolvedStyle[attr];
 
     if (value && typeof value === 'object') {
       // Nested
