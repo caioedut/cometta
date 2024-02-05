@@ -7,13 +7,6 @@ import {
 } from '../constants';
 
 export default function reset() {
-  if (typeof document !== 'undefined') {
-    Object.entries(__cometta_elements__).forEach(([cssClass, $el]) => {
-      $el?.remove?.();
-      delete __cometta_elements__[cssClass];
-    });
-  }
-
   for (const key in __cometta_aliases__) {
     delete __cometta_aliases__[key];
   }
