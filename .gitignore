@@ -1,41 +1,58 @@
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-/main/out
-/dist
-
-# misc
-.DS_Store
-*.pem
-
-# npm
-yarn.lock
-package-lock.json
+# Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
 
-# local env files
-.env*.local
+# Dependencies
+web_modules/
+node_modules/
+jspm_packages/
+bower_components/
 
-# vercel
-.vercel
+# Lockfile
+bun.lockb
+yarn.lock
+pnpm-lock.yaml
+package-lock.json
 
-# typescript
+# TypeScript
 *.tsbuildinfo
 next-env.d.ts
 
-# ide
-.idea/
-.vscode/
+# Distribution
+out
+dist
+build
+package
+coverage
+web-build
+
+# Cache
+.npm
+.next
+.nuxt
+.expo
+.temp
+.cache
+.vercel
+.DS_Store
+.svelte-kit
+.eslintcache
+.parcel-cache
+.stylelintcache
+
+# Env
+.env*.local
+
+# IDE
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
