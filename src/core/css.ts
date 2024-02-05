@@ -20,8 +20,6 @@ export default function css(...styles: (ComettaParam | ComettaParam[])[]) {
 
     // Inline styles doesn't support @media queries
     if (attr.startsWith('@')) {
-      // TODO: apply style based on polyfill (like in jss) ?
-      // Object.assign(result, media(attr, value as any) || {});
       continue;
     }
 
