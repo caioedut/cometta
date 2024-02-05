@@ -51,13 +51,11 @@ const styles = cometta.create({
 
 ```
 
-## Usage
+`cometta.sheet(...)` generate style and insert tag into the DOM, returning `className`.
 
-Use `cometta.sheet(...)` to generate style tag on DOM and return `className`.
+`cometta.jss(...)` generate jss style returning `object`.
 
-Use `cometta.jss(...)` to generate jss style and return `object`.
-
-Use `cometta.css(...)` to generate inline style and return `string`.
+`cometta.css(...)` generate inline style returning `string`.
 
 ### Vanilla
 ```jsx
