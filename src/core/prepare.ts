@@ -2,11 +2,13 @@ import { ComettaParam, ComettaStyle } from '../types';
 import aliasProps from '../resolver/aliasProps';
 import nativeProps from '../resolver/nativeProps';
 import webProps from '../resolver/webProps';
+import border from '../resolver/border';
+import spacing from '../resolver/spacing';
 import {
   __cometta_aliases__,
   __cometta_parsers__,
-  __cometta_units__,
   __cometta_polyfill__,
+  __cometta_units__,
   __cometta_variables__,
   isNative,
   isWeb,
@@ -49,31 +51,25 @@ export default function prepare(...styles: (ComettaParam | ComettaParam[])[]) {
         let prop: string | null = attr;
         let value = currentStyles[prop];
 
-        // apply "*" parser
-        if (__cometta_parsers__['*'] instanceof Function) {
-          const parsed = __cometta_parsers__['*'](value, prop);
-
-          if (parsed) {
-            Object.assign(result, parsed);
-            continue;
-          }
-        }
-
-        // custom parsers
-        if (__cometta_parsers__[prop] instanceof Function) {
-          Object.assign(result, __cometta_parsers__[prop](value, prop) || {});
-          continue;
-        }
-
-        // recursive object prepare
-        if (typeof value === 'object' && value) {
-          result[prop] = prepare(value);
+        if (typeof value === 'undefined') {
           continue;
         }
 
         // parse to camel-case
         if (!prop.startsWith('_') && !prop.startsWith('-')) {
           prop = prop.replace(/([\-_]\w)/g, (k) => k[1]?.toUpperCase() ?? '');
+        }
+
+        // apply "*" parser
+        if (__cometta_parsers__['*'] instanceof Function) {
+          Object.assign(result, __cometta_parsers__['*'](value, prop) || {});
+          continue;
+        }
+
+        // custom parsers
+        if (__cometta_parsers__[prop] instanceof Function) {
+          Object.assign(result, __cometta_parsers__[prop](value, prop) || {});
+          continue;
         }
 
         // extract alias
@@ -93,66 +89,27 @@ export default function prepare(...styles: (ComettaParam | ComettaParam[])[]) {
           continue;
         }
 
-        const valueTrim = `${value ?? ''}`.trim();
-        const valueSplit = valueTrim.split(/\s/g).filter((item: string) => item.trim());
-
-        // Resolve borders
-        if (['border', 'borderTop', 'borderBottom', 'borderLeft', 'borderRight'].includes(prop)) {
-          if (value) {
-            const preffix = prop;
-            const types = [
-              'none',
-              'hidden',
-              'dotted',
-              'dashed',
-              'solid',
-              'double',
-              'groove',
-              'ridge',
-              'inset',
-              'outset',
-              'initial',
-              'inherit',
-            ];
-
-            const styleIndex = valueSplit.findIndex((item: string) => types.includes(item));
-            const borderStyle = styleIndex >= 0 ? valueSplit.splice(styleIndex, 1).shift() : 'solid';
-
-            const sizeIndex = valueSplit.findIndex((item: string) => /^\d\w*$/.test(item));
-            const borderWidth =
-              sizeIndex >= 0 ? Number(valueSplit.splice(sizeIndex, 1).shift()?.replace(/\D/g, '') ?? 1) : 1;
-
-            const color = valueSplit?.shift()?.replace(/undefined|null|false|true/g, '');
-            const borderColor = color || '#000000';
-
-            Object.assign(result, {
-              [`${preffix}Width`]: borderWidth,
-              [`${preffix}Style`]: borderStyle,
-              [`${preffix}Color`]: borderColor,
-            });
-
-            prop = null;
-          }
+        // recursive object
+        if (typeof value === 'object' && value) {
+          result[prop] = prepare(value);
+          continue;
         }
 
-        // Resolve padding/margin arrays
-        ['padding', 'margin'].forEach((prefix) => {
-          if (prop === prefix) {
-            const [v1, v2, v3, v4] = valueSplit;
+        const valueTrim = `${value ?? ''}`.trim();
 
-            if (valueSplit.length > 1) {
-              prop = null;
+        // resolve borders
+        if (['border', 'borderTop', 'borderBottom', 'borderLeft', 'borderRight'].includes(prop)) {
+          Object.assign(result, border(valueTrim, prop));
+          continue;
+        }
 
-              Object.assign(result, {
-                [`${prefix}Top`]: parseUnit(v1),
-                [`${prefix}Right`]: parseUnit(v2 ?? v1),
-                [`${prefix}Bottom`]: parseUnit(v3 ?? v1),
-                [`${prefix}Left`]: parseUnit(v4 ?? v2 ?? v1),
-              });
-            }
-          }
-        });
+        // resolve padding/margin arrays
+        if (['padding', 'margin'].includes(prop)) {
+          Object.assign(result, spacing(valueTrim, prop));
+          continue;
+        }
 
+        // set value when there is no parser
         if (prop && typeof value !== 'undefined') {
           result[prop] = value;
         }
@@ -224,7 +181,7 @@ export default function prepare(...styles: (ComettaParam | ComettaParam[])[]) {
       }
     }
 
-    if (typeof value !== 'undefined') {
+    if (prop && typeof value !== 'undefined') {
       result[prop] = value;
     }
   }
