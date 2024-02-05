@@ -23,7 +23,7 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "test": "tsx scripts/test.ts",
-    "build": "parcel build",
+    "build": "tsx scripts/build.ts",
     "publish:stable": "tsx scripts/publish.ts"
   },
   "devDependencies": {

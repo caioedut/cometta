@@ -7,7 +7,4 @@ rmSync('dist', {
   recursive: true,
 });
 
-pmex('tsc --build --force');
-
-copyFileSync('package.json', 'dist/package.json');
-copyFileSync('README.md', 'dist/README.md');
+pmex('parcel build');
