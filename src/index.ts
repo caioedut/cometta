@@ -15,35 +15,16 @@ const cometta = {
   css,
   create,
   sheet,
-  alias: (...args: Parameters<typeof alias>) => {
-    alias(...args);
-    return cometta;
-  },
-  parser: (...args: Parameters<typeof parser>) => {
-    parser(...args);
-    return cometta;
-  },
-  unit: (...args: Parameters<typeof unit>) => {
-    unit(...args);
-    return cometta;
-  },
-  variables: (...args: Parameters<typeof variables>) => {
-    variables(...args);
-    return cometta;
-  },
-  normalize: (...args: Parameters<typeof normalize>) => {
-    normalize(...args);
-    return cometta;
-  },
-  polyfill: (...args: Parameters<typeof polyfill>) => {
-    polyfill(...args);
-    return cometta;
-  },
-  createStyleSheet: (...args: Parameters<typeof createStyleSheet>) => {
-    createStyleSheet(...args);
-    return cometta;
-  },
+  alias,
+  parser,
+  unit,
+  variables,
+  normalize,
+  polyfill,
+  createStyleSheet,
 };
+
+export { jss, css, create, sheet, alias, parser, unit, variables, normalize, polyfill, createStyleSheet };
 
 export * from './types';
 

@@ -1,18 +1,18 @@
 import { Dimensions, Pressable, Text, View } from 'react-native';
-import cometta from 'cometta';
+import { create, jss, polyfill, variables } from 'cometta';
 
-cometta.polyfill({
+polyfill({
   screenWidth: Dimensions.get('window').width,
   screenHeight: () => Dimensions.get('window').height,
 });
 
-cometta.variables({
+variables({
   primary: '#FF4500',
   secondary: '#FF8C00',
   tertiary: '#FFA500',
 });
 
-const styles = cometta.create({
+const styles = create({
   container: {
     backgroundColor: '#E8C897',
     display: 'flex',
@@ -47,10 +47,10 @@ const styles = cometta.create({
 
 export default function App() {
   return (
-    <View style={cometta.jss(styles.container)}>
-      <Text style={cometta.jss(styles.icon)}>☄ Cometta</Text>
-      <Pressable style={cometta.jss(styles.button)}>
-        <Text style={cometta.jss(styles.buttonTitle)}>Using JSS "style"</Text>
+    <View style={jss(styles.container)}>
+      <Text style={jss(styles.icon)}>☄ Cometta</Text>
+      <Pressable style={jss(styles.button)}>
+        <Text style={jss(styles.buttonTitle)}>Using JSS "style"</Text>
       </Pressable>
     </View>
   );
