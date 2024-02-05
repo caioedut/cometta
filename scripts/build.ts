@@ -1,4 +1,4 @@
-import { copyFileSync, rmSync } from 'fs';
+import { rmSync } from 'fs';
 import pmex from 'pmex';
 
 // Remove current build
