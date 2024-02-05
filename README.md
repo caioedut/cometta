@@ -37,9 +37,9 @@
 ## Example
 
 ```js
-import cometta from 'cometta';
+import { create } from 'cometta';
 
-const styles = cometta.create({
+const styles = create({
    container: {
      display: 'flex',
      alignItems: 'center',
@@ -51,41 +51,41 @@ const styles = cometta.create({
 
 ```
 
-`cometta.sheet(...)` generate style and insert tag into the DOM, returning `className`.
+`sheet(...)` generate style and insert tag into the DOM, returning `className`.
 
-`cometta.jss(...)` generate jss style returning `object`.
+`jss(...)` generate jss style returning `object`.
 
-`cometta.css(...)` generate inline style returning `string`.
+`css(...)` generate inline style returning `string`.
 
 ### Vanilla
 ```jsx
-document.body.innerHTML = `<main class="${cometta.sheet(styles.container)}"></main>`
+document.body.innerHTML = `<main class="${sheet(styles.container)}"></main>`
 ```
 
 ### React
 
 ```jsx
-<main className={cometta.sheet(styles.container)}></main>
+<main className={sheet(styles.container)}></main>
 ```
 
 ### React Native
 
 ```jsx
-<View style={cometta.jss(styles.container)}></View>
+<View style={jss(styles.container)}></View>
 ```
 
 ### Vue
 
 ```vue
-<main :class="cometta.sheet(styles.container)"></main>
+<main :class="sheet(styles.container)"></main>
 ```
 
 ## Normalize CSS
 
 ```js
-import cometta from 'cometta';
+import { normalize } from 'cometta';
 
-cometta.normalize();
+normalize();
 ```
 
 ## Variables
@@ -93,13 +93,13 @@ cometta.normalize();
 Used to create css-like variables.
 
 ```js
-import cometta from 'cometta';
+import { create, variables } from 'cometta';
 
-cometta.variables({
+variables({
    primary: '#9EA1D4'
 });
 
-const styles = cometta.create({
+const styles = create({
    container: {
      backgroundColor: 'var(primary)'
    },
@@ -111,15 +111,15 @@ const styles = cometta.create({
 Used to create customized parsers.
 
 ```js
-import cometta from 'cometta';
+import { create, parser } from 'cometta';
 
-cometta.parser('bg', (value) => {
+parser('bg', (value) => {
     if (value) {
         return { backgroundColor: value }
     }
 });
 
-const styles = cometta.create({
+const styles = create({
    container: {
      bg: 'green'
    },
@@ -131,13 +131,13 @@ const styles = cometta.create({
 Used to resolve a custom value unit.
 
 ```js
-import cometta from 'cometta';
+import { create, unit } from 'cometta';
 
-cometta.unit('gap', (value) => {
+unit('gap', (value) => {
     return value * 16;
 });
 
-const styles = cometta.create({
+const styles = create({
    container: {
      padding: '1gap'
    },
@@ -150,16 +150,16 @@ const styles = cometta.create({
 Used to define some values when the environment is not standardized. Example for React Native:
 
 ```js
-import cometta from 'cometta';
+import { create, jss, polyfill } from 'cometta';
 import { Dimensions, View } from 'react-native';
 
-cometta.polyfill({
+polyfill({
   fontSize: 16,
   screenWidth: () => Dimensions.get('window').width,
   screenHeight: () => Dimensions.get('window').height,
 });
 
-const styles = cometta.create({
+const styles = create({
    container: {
      display: 'flex',
      alignItems: 'center',
@@ -171,7 +171,7 @@ const styles = cometta.create({
 
 function App() {
   return (
-    <View style={cometta.jss(styles.container)}>
+    <View style={jss(styles.container)}>
       {/* ... */}
     </View>
   );
@@ -181,12 +181,12 @@ function App() {
 
 ## Media Query (`@media`)
 
-Works on `cometta.sheet()` with no configuration and on `cometta.jss()` using polyfill.
+Works on `sheet()` with no configuration and on `jss()` using polyfill.
 
 ```js
-import cometta from 'cometta';
+import { create } from 'cometta';
 
-const styles = cometta.create({
+const styles = create({
    container: {
      backgroundColor: 'red',
      '@media (min-width: 769px)': {

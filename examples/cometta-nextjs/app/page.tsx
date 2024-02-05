@@ -1,14 +1,14 @@
 'use client';
 
-import cometta from '../../../src';
+import { create, jss, sheet, variables } from '../../../src';
 
-cometta.variables({
+variables({
   primary: '#FF4500',
   secondary: '#FF8C00',
   tertiary: '#FFA500',
 });
 
-const styles = cometta.create({
+const styles = create({
   container: {
     backgroundColor: '#E8C897',
     display: 'flex',
@@ -45,10 +45,10 @@ const styles = cometta.create({
 
 export default function Page() {
   return (
-    <main className={cometta.sheet(styles.container)}>
-      <div className={cometta.sheet(styles.icon)}>☄ Cometta</div>
-      <button className={cometta.sheet(styles.button)}>Using "class"</button>
-      <button style={cometta.jss(styles.button)}>Using "style"</button>
+    <main className={sheet(styles.container)}>
+      <div className={sheet(styles.icon)}>☄ Cometta</div>
+      <button className={sheet(styles.button)}>Using "class"</button>
+      <button style={jss(styles.button)}>Using "style"</button>
     </main>
   );
 }

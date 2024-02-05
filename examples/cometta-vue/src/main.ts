@@ -1,9 +1,9 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
-import cometta from '../../../src';
+import { normalize } from '../../../src';
 
-cometta.normalize();
+normalize();
 
 const app = createApp(App);
 
