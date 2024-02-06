@@ -1,4 +1,4 @@
-# Logs
+# Log
 logs
 *.log
 npm-debug.log*
@@ -7,7 +7,7 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
-# Dependencies
+# Dependency
 web_modules/
 node_modules/
 jspm_packages/
@@ -40,8 +40,10 @@ web-build
 .cache
 .vercel
 .DS_Store
+.docusaurus
 .svelte-kit
 .eslintcache
+.cache-loader
 .parcel-cache
 .stylelintcache
 
