@@ -1,12 +1,15 @@
 import pmex from 'pmex';
 import { execSync } from 'child_process';
 
+const args = process.argv.slice(2);
+
 pmex('test');
 
 pmex('build');
 
-pmex('npm version patch');
+if (!args.includes('--no-version')) {
+  pmex('npm version patch');
+  execSync('git push', { stdio: 'inherit' });
+}
 
 execSync('npm publish', { stdio: 'inherit' });
-
-execSync('git push', { stdio: 'inherit' });
