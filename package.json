@@ -1,5 +1,6 @@
 {
   "name": "cometta",
+  "description": "The easiest way to style using CSS or JSS.",
   "version": "0.1.6",
   "keywords": [
     "css",
@@ -8,14 +9,18 @@
     "styling"
   ],
   "license": "MIT",
-  "repository": "https://github.com/caioedut/cometta",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/caioedut/cometta"
+  },
   "author": {
     "name": "Caio Teixeira",
     "email": "caioedut@gmail.com"
   },
+  "type": "commonjs",
   "source": "src/index.ts",
   "main": "dist/index.js",
-  "module": "dist/module.js",
+  "module": "dist/index.mjs",
   "types": "dist/types.d.ts",
   "files": [
     "dist"
