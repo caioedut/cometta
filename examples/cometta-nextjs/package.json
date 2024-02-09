@@ -7,6 +7,7 @@
     "build": "next build"
   },
   "dependencies": {
+    "cometta": "file:../..",
     "react": "^18",
     "react-dom": "^18",
     "next": "14.0.4"

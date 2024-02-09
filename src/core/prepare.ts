@@ -56,14 +56,18 @@ export default function prepare(...styles: (ComettaParam | ComettaParam[])[]) {
         }
 
         // parse to camel-case
-        if (!prop.startsWith('_') && !prop.startsWith('-')) {
+        if (!['@', '&', '_', '-'].includes(prop.substring(0, 1))) {
           prop = prop.replace(/([\-_]\w)/g, (k) => k[1]?.toUpperCase() ?? '');
         }
 
         // apply "*" parser
         if (__cometta_parsers__['*'] instanceof Function) {
-          Object.assign(result, __cometta_parsers__['*'](value, prop) || {});
-          continue;
+          const parsed = __cometta_parsers__['*'](value, prop);
+
+          if (parsed) {
+            Object.assign(result, parsed);
+            continue;
+          }
         }
 
         // custom parsers

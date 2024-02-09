@@ -1,9 +1,9 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { normalize } from '../../../src';
+import cometta from 'cometta';
 
-normalize();
+cometta.normalize();
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
