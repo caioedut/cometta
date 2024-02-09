@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { create, css, sheet, variables } from '../../../../src';
+import cometta from 'cometta';
 
-variables({
+cometta.variables({
   primary: '#FF4500',
   secondary: '#FF8C00',
   tertiary: '#FFA500',
 });
 
-const styles = create({
+const styles = cometta.create({
   container: {
     backgroundColor: '#E8C897',
     display: 'flex',
@@ -44,9 +44,9 @@ const styles = create({
 </script>
 
 <template>
-  <main :class="sheet(styles.container)">
-    <div :class="sheet(styles.icon)">☄ Cometta</div>
-    <button :class="sheet(styles.button)">Using "class"</button>
-    <button :style="css(styles.button)">Using "style"</button>
+  <main :class="cometta.sheet(styles.container)">
+    <div :class="cometta.sheet(styles.icon)">☄ Cometta</div>
+    <button :class="cometta.sheet(styles.button)">Using "class"</button>
+    <button :style="cometta.css(styles.button)">Using "style"</button>
   </main>
 </template>
