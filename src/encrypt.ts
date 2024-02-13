@@ -15,9 +15,9 @@ function crc32(str: string) {
 }
 
 function makeCRCTable() {
-  const crcTable: any[] = [];
+  const crcTable: number[] = [];
 
-  let c;
+  let c: number;
 
   for (let n = 0; n < 256; n++) {
     c = n;

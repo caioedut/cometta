@@ -1,8 +1,8 @@
 import encrypt from '../encrypt';
 import { ComettaParam } from '../types';
+import createStyleSheet from './createStyleSheet';
 import css from './css';
 import prepare from './prepare';
-import createStyleSheet from './createStyleSheet';
 
 export default function sheet(...styles: (ComettaParam | ComettaParam[])[]) {
   const resolvedStyle = prepare(...styles);
@@ -13,7 +13,7 @@ export default function sheet(...styles: (ComettaParam | ComettaParam[])[]) {
   let cssText = `.${cssClass} { ${css(resolvedStyle)} }`;
 
   for (let attr in resolvedStyle) {
-    let value = resolvedStyle[attr];
+    const value = resolvedStyle[attr];
 
     if (value && typeof value === 'object') {
       // Nested

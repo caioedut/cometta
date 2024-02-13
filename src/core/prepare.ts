@@ -1,9 +1,3 @@
-import { ComettaParam, ComettaStyle } from '../types';
-import aliasProps from '../resolver/aliasProps';
-import nativeProps from '../resolver/nativeProps';
-import webProps from '../resolver/webProps';
-import border from '../resolver/border';
-import spacing from '../resolver/spacing';
 import {
   __cometta_aliases__,
   __cometta_parsers__,
@@ -13,13 +7,15 @@ import {
   isNative,
   isWeb,
 } from '../constants';
-
-const parseUnit = (value: any) => {
-  return isNaN(value) ? value : Number(value);
-};
+import aliasProps from '../resolver/aliasProps';
+import border from '../resolver/border';
+import nativeProps from '../resolver/nativeProps';
+import spacing from '../resolver/spacing';
+import webProps from '../resolver/webProps';
+import { ComettaParam, ComettaStyle } from '../types';
 
 export default function prepare(...styles: (ComettaParam | ComettaParam[])[]) {
-  let result: ComettaStyle = {};
+  const result: ComettaStyle = {};
 
   const resolved = styles.filter(Boolean).map((item) => {
     return Array.isArray(item) ? prepare(...item) : item;
@@ -47,9 +43,9 @@ export default function prepare(...styles: (ComettaParam | ComettaParam[])[]) {
     }
 
     if (typeof currentStyles === 'object' && currentStyles) {
-      for (let attr in currentStyles) {
+      for (const attr in currentStyles) {
         let prop: string | null = attr;
-        let value = currentStyles[prop];
+        const value = currentStyles[prop];
 
         if (typeof value === 'undefined') {
           continue;
@@ -135,7 +131,7 @@ export default function prepare(...styles: (ComettaParam | ComettaParam[])[]) {
       : __cometta_polyfill__.screenHeight;
 
   // Cast Units
-  for (let prop in result) {
+  for (const prop in result) {
     let value = result[prop];
 
     if (typeof value === 'string') {

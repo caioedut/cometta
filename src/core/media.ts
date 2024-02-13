@@ -1,6 +1,6 @@
-import prepare from './prepare';
 import { __cometta_polyfill__ } from '../constants';
 import { ComettaParam } from '../types';
+import prepare from './prepare';
 
 export default function media(query: string, style: ComettaParam | ComettaParam[]) {
   const mediaQueries = prepare(
@@ -29,7 +29,7 @@ export default function media(query: string, style: ComettaParam | ComettaParam[
       ? __cometta_polyfill__.screenHeight()
       : __cometta_polyfill__.screenHeight) || 0;
 
-  for (let mediaAttr in mediaQueries) {
+  for (const mediaAttr in mediaQueries) {
     const mediaValue = mediaQueries[mediaAttr];
 
     if (typeof mediaValue !== 'number') {

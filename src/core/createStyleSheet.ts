@@ -4,7 +4,7 @@ export default function createStyleSheet(css: string, options: { uniqueId?: stri
   if (typeof document !== 'undefined') {
     const { uniqueId, prepend } = options;
 
-    let tag;
+    let tag: HTMLStyleElement;
 
     if (uniqueId) {
       tag = __cometta_elements__[uniqueId] ?? document.createElement('style');

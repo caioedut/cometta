@@ -6,7 +6,7 @@ export default function css(...styles: (ComettaParam | ComettaParam[])[]) {
   const result: { [key: string]: any } = {};
   const resolvedStyle = prepare(...styles);
 
-  for (let attr in resolvedStyle) {
+  for (const attr in resolvedStyle) {
     if (attr === '__className') {
       continue;
     }
@@ -43,5 +43,5 @@ export default function css(...styles: (ComettaParam | ComettaParam[])[]) {
       attr = attr.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
       return `${attr}: ${value};`;
     })
-    .join(` `);
+    .join(' ');
 }
