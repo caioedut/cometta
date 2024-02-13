@@ -7,7 +7,7 @@ describe('css()', () => {
       color: '#FFFFFF',
     });
 
-    expect(style).toEqual(`background-color: #000000; color: #FFFFFF;`);
+    expect(style).toEqual('background-color: #000000; color: #FFFFFF;');
   });
 
   test('must resolve numeric to "px" values', () => {
@@ -15,6 +15,6 @@ describe('css()', () => {
       padding: 4,
     });
 
-    expect(style).toEqual(`padding: 4px;`);
+    expect(style).toEqual('padding: 4px;');
   });
 });

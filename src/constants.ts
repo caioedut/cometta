@@ -14,7 +14,7 @@ export const __cometta_parsers__: Record<string, Parser> = {};
 
 export const __cometta_units__: Record<string, UnitParser> = {};
 
-export const __cometta_elements__: Record<string, any> = [];
+export const __cometta_elements__: Record<string, HTMLStyleElement> = {};
 
 export const __cometta_polyfill__: Polyfill = {
   fontSize: 16,

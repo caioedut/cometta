@@ -1,10 +1,10 @@
-import pmex from 'pmex';
 import { execSync } from 'child_process';
+import pmex from 'pmex';
 
 const args = process.argv.slice(2).join(' ');
 
-pmex(`prettier "{scripts,src}/**/*.{js,jsx,ts,tsx}" --check`);
+pmex('biome check ./scripts ./src ./tests');
 
-pmex(`tsc --noEmit`);
+pmex('tsc --noEmit');
 
 execSync(`jest ${args}`, { stdio: 'inherit' });

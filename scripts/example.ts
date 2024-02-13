@@ -1,5 +1,5 @@
+import { existsSync, rmSync } from 'fs';
 import pmex from 'pmex';
-import { rmSync, existsSync } from 'fs';
 import * as process from 'process';
 
 const example = process.argv.slice(2)[0];
@@ -20,9 +20,9 @@ rmSync(`${cwd}/node_modules/@react-bulk`, {
 
 pmex(
   {
-    npm: `install && npm prune`,
-    pnpm: `install --fix-lockfile`,
-    yarn: `install --check-files`,
+    npm: 'install && npm prune',
+    pnpm: 'install --fix-lockfile',
+    yarn: 'install --check-files',
   },
   { cwd },
 );

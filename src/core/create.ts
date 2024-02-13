@@ -1,5 +1,5 @@
-import { ComettaStyle } from '../types';
 import { isWeb } from '../constants';
+import { ComettaStyle } from '../types';
 import sheet from './sheet';
 
 export default function create<T>(schema: T) {
