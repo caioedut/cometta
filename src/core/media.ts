@@ -54,6 +54,14 @@ export default function media(query: string, style: ComettaParam | ComettaParam[
     }
 
     if (typeof mediaValue === 'number') {
+      if (mediaAttr === 'width') {
+        isValid = screenWidth === mediaValue;
+      }
+
+      if (mediaAttr === 'height') {
+        isValid = screenHeight === mediaValue;
+      }
+
       if (mediaAttr === 'minWidth') {
         isValid = screenWidth >= mediaValue;
       }
