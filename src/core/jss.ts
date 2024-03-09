@@ -19,7 +19,7 @@ export default function jss(...styles: (ComettaParam | ComettaParam[])[]) {
     }
 
     // JSS media queries (@media)
-    if (attr.startsWith('@')) {
+    if (attr.startsWith('@media')) {
       Object.assign(result, media(attr, value as any) || {});
       continue;
     }

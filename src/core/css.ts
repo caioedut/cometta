@@ -18,7 +18,7 @@ export default function css(...styles: (ComettaParam | ComettaParam[])[]) {
       continue;
     }
 
-    // Inline styles doesn't support @media queries
+    // Inline styles doesn't support @ queries
     if (attr.startsWith('@')) {
       continue;
     }
