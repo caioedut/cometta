@@ -19,6 +19,11 @@ export default function media(query: string, style: ComettaParam | ComettaParam[
 
   const mediaChecks: boolean[] = [];
 
+  const colorScheme =
+    (__cometta_polyfill__.colorScheme instanceof Function
+      ? __cometta_polyfill__.colorScheme()
+      : __cometta_polyfill__.colorScheme) || 'light';
+
   const screenWidth =
     (__cometta_polyfill__.screenWidth instanceof Function
       ? __cometta_polyfill__.screenWidth()
@@ -33,6 +38,10 @@ export default function media(query: string, style: ComettaParam | ComettaParam[
     const mediaValue = mediaQueries[mediaAttr];
 
     let isValid = false;
+
+    if (mediaAttr === 'prefersColorScheme') {
+      isValid = colorScheme === mediaValue;
+    }
 
     if (mediaAttr === 'orientation') {
       if (mediaValue === 'portrait') {
