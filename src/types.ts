@@ -15,6 +15,7 @@ export type Variables = {
 };
 
 export type Polyfill = {
+  colorScheme: 'light' | 'dark' | (() => 'light' | 'dark');
   fontSize: null | number | (() => number);
   screenWidth: null | number | (() => number);
   screenHeight: null | number | (() => number);
