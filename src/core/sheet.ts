@@ -23,7 +23,7 @@ export default function sheet(...styles: (ComettaParam | ComettaParam[])[]) {
       }
 
       // Media query
-      if (attr.startsWith('@')) {
+      if (attr.startsWith('@media')) {
         cssMedia += `${attr} { .${cssClass} { ${css(value)} } }`;
       }
     }

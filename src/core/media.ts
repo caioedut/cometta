@@ -8,7 +8,7 @@ export default function media(query: string, style: ComettaParam | ComettaParam[
       query
         .replace('@media', '')
         .trim()
-        .split('and')
+        .split(' and ')
         .map((item) => {
           const [attr, value] = item.trim().replace(/^\(/, '').replace(/\)$/, '').split(':');
 
@@ -17,7 +17,7 @@ export default function media(query: string, style: ComettaParam | ComettaParam[
     ),
   );
 
-  let mediaMatches = true;
+  const mediaChecks: boolean[] = [];
 
   const screenWidth =
     (__cometta_polyfill__.screenWidth instanceof Function
@@ -32,26 +32,38 @@ export default function media(query: string, style: ComettaParam | ComettaParam[
   for (const mediaAttr in mediaQueries) {
     const mediaValue = mediaQueries[mediaAttr];
 
-    if (typeof mediaValue !== 'number') {
-      continue;
+    let isValid = false;
+
+    if (mediaAttr === 'orientation') {
+      if (mediaValue === 'portrait') {
+        isValid = screenHeight >= screenWidth;
+      }
+
+      if (mediaValue === 'landscape') {
+        isValid = screenHeight < screenWidth;
+      }
     }
 
-    if (mediaAttr === 'minWidth' && screenWidth < mediaValue) {
-      mediaMatches = false;
+    if (typeof mediaValue === 'number') {
+      if (mediaAttr === 'minWidth') {
+        isValid = screenWidth >= mediaValue;
+      }
+
+      if (mediaAttr === 'maxWidth') {
+        isValid = screenWidth <= mediaValue;
+      }
+
+      if (mediaAttr === 'minHeight') {
+        isValid = screenWidth >= mediaValue;
+      }
+
+      if (mediaAttr === 'maxHeight') {
+        isValid = screenHeight <= mediaValue;
+      }
     }
 
-    if (mediaAttr === 'maxWidth' && screenWidth > mediaValue) {
-      mediaMatches = false;
-    }
-
-    if (mediaAttr === 'minHeight' && screenHeight < mediaValue) {
-      mediaMatches = false;
-    }
-
-    if (mediaAttr === 'maxHeight' && screenHeight > mediaValue) {
-      mediaMatches = false;
-    }
+    mediaChecks.push(isValid);
   }
 
-  return mediaMatches ? style : null;
+  return mediaChecks.every((item) => item) ? style : null;
 }
