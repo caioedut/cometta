@@ -1,4 +1,4 @@
-import { rmSync } from 'fs';
+import { rmSync } from 'node:fs';
 import pmex from 'pmex';
 
 // Remove current build

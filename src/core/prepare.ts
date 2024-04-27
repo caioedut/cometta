@@ -12,7 +12,7 @@ import border from '../resolver/border';
 import nativeProps from '../resolver/nativeProps';
 import spacing from '../resolver/spacing';
 import webProps from '../resolver/webProps';
-import { ComettaParam, ComettaStyle } from '../types';
+import type { ComettaParam, ComettaStyle } from '../types';
 
 export default function prepare(...styles: (ComettaParam | ComettaParam[])[]) {
   const result: ComettaStyle = {};

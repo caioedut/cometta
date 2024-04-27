@@ -1,6 +1,6 @@
-import { existsSync, rmSync } from 'fs';
+import { existsSync, rmSync } from 'node:fs';
+import * as process from 'node:process';
 import pmex from 'pmex';
-import * as process from 'process';
 
 const example = process.argv.slice(2)[0];
 

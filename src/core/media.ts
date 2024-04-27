@@ -1,5 +1,5 @@
 import { __cometta_polyfill__ } from '../constants';
-import { ComettaParam } from '../types';
+import type { ComettaParam } from '../types';
 import prepare from './prepare';
 
 export default function media(query: string, style: ComettaParam | ComettaParam[]) {
@@ -50,6 +50,19 @@ export default function media(query: string, style: ComettaParam | ComettaParam[
 
       if (mediaValue === 'landscape') {
         isValid = screenHeight < screenWidth;
+      }
+    }
+
+    if (typeof mediaValue === 'string') {
+      if (mediaAttr === 'aspectRatio') {
+        const safeEval = Function(`return ${mediaValue}`);
+        isValid = safeEval() === screenWidth / screenHeight;
+      }
+
+      // TODO: minAspectRatio and maxAspectRatio
+      if (mediaAttr === 'minAspectRatio') {
+      }
+      if (mediaAttr === 'maxAspectRatio') {
       }
     }
 

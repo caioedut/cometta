@@ -1,5 +1,5 @@
 import { notPxProps } from '../constants';
-import { ComettaParam } from '../types';
+import type { ComettaParam } from '../types';
 import prepare from './prepare';
 
 export default function css(...styles: (ComettaParam | ComettaParam[])[]) {

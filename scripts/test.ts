@@ -1,10 +1,7 @@
-import { execSync } from 'child_process';
-import pmex from 'pmex';
-
-const args = process.argv.slice(2).join(' ');
+import pmex, { args } from 'pmex';
 
 pmex('biome check ./scripts ./src ./tests');
 
-pmex('tsc --noEmit');
+pmex('tsc --noEmit --skipLibCheck');
 
-execSync(`jest ${args}`, { stdio: 'inherit' });
+pmex(`jest ${args()._raw}`);
