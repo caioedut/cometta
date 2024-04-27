@@ -1,4 +1,4 @@
-import { Alias, Parser, Polyfill, UnitParser, Variables } from './types';
+import type { Alias, Parser, Polyfill, UnitParser, Variables } from './types';
 
 export const isWeb = Boolean(typeof window !== 'undefined' && window.document);
 
@@ -17,6 +17,7 @@ export const __cometta_units__: Record<string, UnitParser> = {};
 export const __cometta_elements__: Record<string, HTMLStyleElement> = {};
 
 export const __cometta_polyfill__: Polyfill = {
+  colorScheme: 'light',
   fontSize: 16,
   screenWidth: () => (isWeb ? window?.innerWidth : 0) || 0,
   screenHeight: () => (isWeb ? window?.innerHeight : 0) || 0,

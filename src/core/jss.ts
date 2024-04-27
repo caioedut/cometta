@@ -1,4 +1,4 @@
-import { ComettaParam } from '../types';
+import type { ComettaParam } from '../types';
 import media from './media';
 import prepare from './prepare';
 
