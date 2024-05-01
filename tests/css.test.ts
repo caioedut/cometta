@@ -1,4 +1,5 @@
 import css from '../src/core/css';
+import prepare from '../src/core/prepare';
 
 describe('css()', () => {
   test('must convert jss object to css string', () => {
@@ -16,5 +17,15 @@ describe('css()', () => {
     });
 
     expect(style).toEqual('padding: 4px;');
+  });
+
+  test('must resolve "Webkit", "Moz" and "O" into kebab-case', () => {
+    const style = css({
+      WebkitTransition: 'all 4s ease',
+      MozTransition: 'all 4s ease',
+      OTransition: 'all 4s ease',
+    });
+
+    expect(style).toEqual('-webkit-transition: all 4s ease; -moz-transition: all 4s ease; -o-transition: all 4s ease;');
   });
 });

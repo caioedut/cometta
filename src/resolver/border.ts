@@ -1,11 +1,11 @@
 export default function border(value: string, prop: string) {
+  const preffix = prop;
+
   if (['0', 'none'].includes(value)) {
-    return { borderWidth: 0 };
+    return { [`${preffix}Width`]: 0 };
   }
 
   const valueSplit = value.split(/\s/g).filter((item: string) => item.trim());
-
-  const preffix = prop;
 
   const types = [
     'none',
