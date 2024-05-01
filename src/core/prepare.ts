@@ -51,7 +51,7 @@ export default function prepare(...styles: (ComettaParam | ComettaParam[])[]) {
           continue;
         }
 
-        // parse to camel-case or pascal-case (for -webkit-, -moz-, -o-, -ms-)
+        // parse to camel-case or pascal-case (for -webkit-, -moz- and -o-)
         if (!['@', '&', '_'].includes(prop.substring(0, 1))) {
           prop = prop.replace(/(-\w)/g, ($1) => $1[1]?.toUpperCase() ?? '');
         }
