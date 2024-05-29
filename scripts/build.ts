@@ -5,4 +5,4 @@ import pmex from 'pmex';
 rmSync('dist', { force: true, recursive: true });
 
 // Build with ParcelJS
-pmex('parcel build --no-cache');
+pmex('parcel build --no-cache --no-optimize --no-scope-hoist');

@@ -1,4 +1,5 @@
 import { __cometta_elements__ } from '../constants';
+import variables from './variables';
 
 export default function createStyleSheet(css: string, options: { uniqueId?: string | number; prepend?: boolean }) {
   if (typeof document !== 'undefined') {
@@ -33,6 +34,11 @@ export default function createStyleSheet(css: string, options: { uniqueId?: stri
       } else {
         head.append(tag);
       }
+    }
+
+    // Insert variables on DOM
+    if (!document.querySelector('[data-cometta="cometta-variables"]')) {
+      variables({});
     }
   }
 }
