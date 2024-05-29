@@ -1,8 +1,8 @@
-import { existsSync, rmSync } from 'node:fs';
+import { cpSync, existsSync, rmSync } from 'node:fs';
 import * as process from 'node:process';
 import pmex, { args } from 'pmex';
 
-const example = args()._args[0];
+const example = args()._[0];
 
 const cwd = `./examples/cometta-${example}`;
 
@@ -13,19 +13,20 @@ if (!example || !existsSync(cwd)) {
 
 pmex('build');
 
-rmSync(`${cwd}/node_modules/@react-bulk`, {
+pmex('install', { cwd });
+
+rmSync(`${cwd}/node_modules/cometta`, {
   force: true,
   recursive: true,
 });
 
-pmex(
-  {
-    bun: 'install',
-    npm: 'install && npm prune',
-    pnpm: 'install --fix-lockfile',
-    yarn: 'install --check-files',
-  },
-  { cwd },
-);
+cpSync('./dist', `${cwd}/node_modules/cometta/dist`, {
+  force: true,
+  recursive: true,
+});
+
+cpSync('./package.json', `${cwd}/node_modules/cometta/package.json`, {
+  force: true,
+});
 
 pmex('dev', { cwd });

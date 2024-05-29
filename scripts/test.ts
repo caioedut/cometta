@@ -4,4 +4,4 @@ pmex('biome check ./scripts ./src ./tests');
 
 pmex('tsc --noEmit --skipLibCheck');
 
-pmex(`jest ${args()._raw}`);
+pmex(`jest ${args().$}`);
