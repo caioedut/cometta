@@ -24,7 +24,7 @@ export default function reset() {
   }
 
   for (const key in __cometta_elements__) {
-    if (typeof document !== 'undefined') {
+    if (typeof globalThis.document !== 'undefined') {
       __cometta_elements__[key]?.remove?.();
     }
 

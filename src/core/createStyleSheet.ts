@@ -2,23 +2,23 @@ import { __cometta_elements__ } from '../constants';
 import variables from './variables';
 
 export default function createStyleSheet(css: string, options: { uniqueId?: string | number; prepend?: boolean }) {
-  if (typeof document !== 'undefined') {
+  if (typeof globalThis.document !== 'undefined') {
     const { uniqueId, prepend } = options;
 
     let tag: HTMLStyleElement;
 
     if (uniqueId) {
-      tag = __cometta_elements__[uniqueId] ?? document.createElement('style');
+      tag = __cometta_elements__[uniqueId] ?? globalThis.document.createElement('style');
       __cometta_elements__[uniqueId] = tag;
     } else {
-      tag = document.createElement('style');
+      tag = globalThis.document.createElement('style');
     }
 
     tag.setAttribute('data-cometta', `${uniqueId ?? ''}`);
     tag.setAttribute('type', 'text/css');
     tag.textContent = css;
 
-    const head = document.head || document.getElementsByTagName('head')[0];
+    const head = globalThis.document.head || globalThis.document.getElementsByTagName('head')[0];
 
     if (tag.parentElement !== head) {
       if (prepend) {
@@ -37,7 +37,7 @@ export default function createStyleSheet(css: string, options: { uniqueId?: stri
     }
 
     // Insert variables on DOM
-    if (!document.querySelector('[data-cometta="cometta-variables"]')) {
+    if (!globalThis.document.querySelector('[data-cometta="cometta-variables"]')) {
       variables({});
     }
   }
