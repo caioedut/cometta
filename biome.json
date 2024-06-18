@@ -26,7 +26,7 @@
       "arrowParentheses": "always",
       "jsxQuoteStyle": "double",
       "semicolons": "always",
-      "trailingComma": "all",
+      "trailingCommas": "all",
       "quoteProperties": "asNeeded",
       "quoteStyle": "single"
     }
