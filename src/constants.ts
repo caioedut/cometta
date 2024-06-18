@@ -1,6 +1,6 @@
 import type { Alias, Parser, Polyfill, UnitParser, Variables } from './types';
 
-export const isWeb = Boolean(typeof window !== 'undefined' && window.document);
+export const isWeb = Boolean(typeof globalThis.window !== 'undefined' && globalThis.document);
 
 export const isNative = typeof navigator !== 'undefined' && navigator?.product === 'ReactNative';
 
@@ -19,8 +19,8 @@ export const __cometta_elements__: Record<string, HTMLStyleElement> = {};
 export const __cometta_polyfill__: Polyfill = {
   colorScheme: 'light',
   fontSize: 16,
-  screenWidth: () => (typeof window !== 'undefined' ? window.innerWidth : 0) || 0,
-  screenHeight: () => (typeof window !== 'undefined' ? window.innerHeight : 0) || 0,
+  screenWidth: () => (typeof globalThis.window !== 'undefined' ? globalThis.window.innerWidth : 0) || 0,
+  screenHeight: () => (typeof globalThis.window !== 'undefined' ? globalThis.window.innerHeight : 0) || 0,
 };
 
 // See https://react-cn.github.io/react/tips/style-props-value-px.html
