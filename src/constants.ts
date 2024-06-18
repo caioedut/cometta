@@ -19,8 +19,8 @@ export const __cometta_elements__: Record<string, HTMLStyleElement> = {};
 export const __cometta_polyfill__: Polyfill = {
   colorScheme: 'light',
   fontSize: 16,
-  screenWidth: () => (isWeb ? window?.innerWidth : 0) || 0,
-  screenHeight: () => (isWeb ? window?.innerHeight : 0) || 0,
+  screenWidth: () => (typeof window !== 'undefined' ? window.innerWidth : 0) || 0,
+  screenHeight: () => (typeof window !== 'undefined' ? window.innerHeight : 0) || 0,
 };
 
 // See https://react-cn.github.io/react/tips/style-props-value-px.html
