@@ -7,7 +7,7 @@
 
   <p>
     <br>
-    The easiest way to style using CSS or JSS.
+    The easiest way to style with CSS or JSS.
     <br>
   </p>
 
@@ -51,11 +51,11 @@ const styles = create({
 
 ```
 
-`sheet(...)` generate style and insert tag into the DOM, returning `className`.
+`sheet(...)` generates styles and inserts a `<style>` tag into the DOM, returning a `className`.
 
-`jss(...)` generate jss style returning `object`.
+`jss(...)` generates JSS styles and returns an `object`.
 
-`css(...)` generate inline style returning `string`.
+`css(...)` generates inline styles and returns a `string`.
 
 ### Vanilla
 ```jsx
@@ -90,7 +90,7 @@ normalize();
 
 ## Variables
 
-Used to create css-like variables.
+Used to create CSS-like variables.
 
 ```js
 import { create, variables } from 'cometta';
@@ -101,7 +101,7 @@ variables({
 
 const styles = create({
    container: {
-     backgroundColor: 'var(primary)'
+     backgroundColor: 'var(--primary)'
    },
 });
 ```
@@ -128,7 +128,7 @@ const styles = create({
 
 ## Units
 
-Used to resolve a custom value unit.
+Used to define a custom unit resolver.
 
 ```js
 import { create, unit } from 'cometta';
@@ -147,7 +147,9 @@ const styles = create({
 
 ## Polyfill
 
-Used to define some values when the environment is not standardized. Example for React Native:
+Used to define fallback values when the environment is not standardized.
+
+Example for React Native:
 
 ```js
 import { create, jss, polyfill } from 'cometta';
@@ -181,7 +183,7 @@ function App() {
 
 ## Media Query (`@media`)
 
-Works on `sheet()` with no configuration and on `jss()` using polyfill.
+Works automatically with `sheet()`, and with `jss()` when using a polyfill.
 
 ```js
 import { create } from 'cometta';
