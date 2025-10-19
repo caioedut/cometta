@@ -97,13 +97,19 @@ export default function prepare(...styles: (ComettaParam | ComettaParam[])[]) {
 
         const valueTrim = `${value ?? ''}`.trim();
 
+        // resolve outline
+        if (prop === 'outline') {
+          Object.assign(result, border(valueTrim, prop));
+          continue;
+        }
+
         // resolve borders
         if (['border', 'borderTop', 'borderBottom', 'borderLeft', 'borderRight'].includes(prop)) {
           Object.assign(result, border(valueTrim, prop));
           continue;
         }
 
-        // resolve padding/margin arrays
+        // resolve padding/margin multi-value string
         if (['padding', 'margin'].includes(prop)) {
           Object.assign(result, spacing(valueTrim, prop));
           continue;
