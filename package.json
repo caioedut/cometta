@@ -2,12 +2,7 @@
   "name": "cometta",
   "description": "The easiest way to style with CSS or JSS.",
   "version": "0.2.9",
-  "keywords": [
-    "css",
-    "style",
-    "css-in-js",
-    "styling"
-  ],
+  "keywords": ["css", "jss", "style", "css-in-js", "styling"],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -21,9 +16,7 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "example": "tsx scripts/example.ts",
